@@ -1,6 +1,6 @@
 .App {
   min-height: 100vh;
-  background-color: rgb(238, 232, 232);
+  background-color: rgb(255, 255, 255);
   margin: 5px;
 }
 
@@ -15,7 +15,7 @@ a.navbar-brand {
 }
 
 .nav-link {
-  color: white !important;
+  color: rgb(236, 157, 195) !important;
   margin-left: 5em;
 }
 

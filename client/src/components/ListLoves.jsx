@@ -63,7 +63,12 @@ const ListLoves = () => {
             return (
               <li key={love.love_id}>
                 {" "}
-                <Love love={love} toDelete={onDelete} toUpdate={onUpdate} />
+                <Love
+                  love={love}
+                  toDelete={onDelete}
+                  toUpdate={onUpdate}
+                  formSubmissionData={love}
+                />
               </li>
             );
           })}
