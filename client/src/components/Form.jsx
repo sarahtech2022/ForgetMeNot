@@ -138,7 +138,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
       />
 
       <Form.Group>
-        <Form.Label>Met</Form.Label>
+        <Form.Label>Year Met</Form.Label>
         <input
           type="text"
           id="add-love-met"
@@ -152,7 +152,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
       <Form.Group>
         <Form.Label>Birthday</Form.Label>
         <input
-          type="text"
+          type="date"
           id="add-love-birthday"
           placeholder="Birthday"
           required
@@ -180,7 +180,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
           id="add-love-color"
           placeholder="Color"
           required
-          value={love.love_flower}
+          value={love.love_color}
           onChange={handleColorChange}
         />
       </Form.Group>
@@ -192,7 +192,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
           id="add-love-cake"
           placeholder="Cake"
           required
-          value={love.love_flower}
+          value={love.love_cake}
           onChange={handleCakeChange}
         />
       </Form.Group>
