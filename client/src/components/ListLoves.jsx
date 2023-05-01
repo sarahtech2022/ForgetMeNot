@@ -11,10 +11,10 @@ const ListLoves = () => {
   const [editingLove, setEditingLove] = useState(null);
 
   const loadLoves = () => {
-    // A function to fetch the list of students that will be load anytime that list change
+    // A function to fetch the list of loves that will be load anytime that list change
     fetch("http://localhost:8080/api/loves")
       .then((response) => response.json())
-      .then((students) => {
+      .then((loves) => {
         setLoves(loves);
       });
   };
@@ -24,21 +24,21 @@ const ListLoves = () => {
   }, []); //leave empty
 
   const onSaveLove = (newLove) => {
-    //console.log(newLove, "From the parent - List of Loves");
+    console.log(newLove, "From the parent - List of Loves");
     setLoves((loves) => [...loves, newLove]);
   };
 
-  //A function to control the update in the parent (student component)
+  //A function to control the update in the parent (love component)
   const updateLove = (savedLove) => {
-    // console.log("Line 29 savedStudent", savedStudent);
-    // This function should update the whole list of students -
+    // console.log("Line 29 savedLove", savedLove);
+    // This function should update the whole list of loves -
     loadLoves();
   };
 
   //A function to handle the Delete funtionality
   const onDelete = (love) => {
     //console.log(love, "delete method")
-    return fetch(`http://localhost:8080/api/students/${love.love_id}`, {
+    return fetch(`http://localhost:8080/api/loves/${love.love_id}`, {
       method: "DELETE",
     }).then((response) => {
       //console.log(response);
@@ -67,7 +67,7 @@ const ListLoves = () => {
                   love={love}
                   toDelete={onDelete}
                   toUpdate={onUpdate}
-                  formSubmissionData={love}
+                  // formSubmissionData={love}
                 />
               </li>
             );

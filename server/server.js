@@ -26,6 +26,7 @@ app.get("/api/loves", async (req, res) => {
 
 // create the POST request
 app.post("/api/loves", async (req, res) => {
+  console.log(req.body);
   try {
     const newLove = {
       love_name: req.body.love_name,

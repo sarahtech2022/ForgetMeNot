@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 
 const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
-  // This is the original State with not initial student
+  // This is the original State with not initial love
   const [love, setLove] = useState(
     editingLove || {
       love_name: "",
@@ -71,6 +71,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
 
   //A function to handle the post request
   const postLove = (newLove) => {
+    console.log("reached Post Request", newLove);
     return fetch("http://localhost:8080/api/loves", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
@@ -80,7 +81,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
         return response.json();
       })
       .then((data) => {
-        //console.log("From the post ", data);
+        console.log("From the post ", data);
         //I'm sending data to the List of Loves (the parent) for updating the list
         onSaveLove(data);
         //this line just for cleaning the form
