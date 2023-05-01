@@ -86,17 +86,21 @@ app.put("/api/loves/:love_id", async (req, res) => {
     love_cake: req.body.love_cake,
     user_id: req.body.user_id, //do I need this????????????****
   };
-  console.log("In the server from the url - the student id", love_id);
+  console.log("In the server from the url - the loves id", love_id);
   console.log(
-    "In the server, from the react - the student to be edited",
-    updatedStudent
+    "In the server, from the react - the love to be edited",
+    updatedLove
   );
-  // UPDATE students SET lastname = "something" WHERE id="16";
-  const query = `UPDATE students SET firstname=$1, lastname=$2, is_current=$3 WHERE id=${love_id} RETURNING *`;
+  // UPDATE loves SET lastname = "something" WHERE id="16";
+  const query = `UPDATE loves SET love_name=$1, is_family=$2, love_met=$3, love_birthday=$4, love_flower=$5, love_color=$6, love_cake=$7 WHERE id=${love_id} RETURNING *`;
   const values = [
-    updatedStudent.firstname,
-    updatedStudent.lastname,
-    updatedStudent.iscurrent,
+    updatedLove.love_name,
+    updatedLove.is_family,
+    updatedLove.love_met,
+    updatedLove.love_birthday,
+    updatedLove.love_flower,
+    updatedLove.love_color,
+    updatedLove.love_cake,
   ];
   try {
     const updated = await db.query(query, values);
