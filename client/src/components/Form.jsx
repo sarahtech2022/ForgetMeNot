@@ -145,15 +145,63 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
           placeholder="Met"
           required
           value={love.love_met}
-          onChange={handleLastnameChange}
+          onChange={handleMetChange}
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Birthday</Form.Label>
+        <input
+          type="text"
+          id="add-love-birthday"
+          placeholder="Birthday"
+          required
+          value={love.love_birthday}
+          onChange={handleBirthdayChange}
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Flower</Form.Label>
+        <input
+          type="text"
+          id="add-love-flower"
+          placeholder="Flower"
+          required
+          value={love.love_flower}
+          onChange={handleFlowerChange}
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Color</Form.Label>
+        <input
+          type="text"
+          id="add-love-color"
+          placeholder="Color"
+          required
+          value={love.love_flower}
+          onChange={handleColorChange}
+        />
+      </Form.Group>
+
+      <Form.Group>
+        <Form.Label>Cake</Form.Label>
+        <input
+          type="text"
+          id="add-love-cake"
+          placeholder="Cake"
+          required
+          value={love.love_flower}
+          onChange={handleCakeChange}
         />
       </Form.Group>
 
       <Form.Group>
         <Button type="submit" variant="outline-success">
-          {student.id ? "Edit Student" : "Add Student"}
+          {love.love_id ? "Edit Love" : "Add Love"}
         </Button>
-        {student.id ? (
+        {love.love_id ? (
           <Button type="button" variant="outline-warning" onClick={clearForm}>
             Cancel
           </Button>
