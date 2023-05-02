@@ -39,7 +39,11 @@ function LoveModal({ loveinfo }) {
           <Modal.Title>Info about your love:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {loveinfo.is_family} {loveinfo.love_birthday}{" "}
+          <p>{loveinfo.is_family}</p>
+          <p> {loveinfo.love_birthday.slice(0, 10)}</p>
+          <p> {loveinfo.love_flower}</p>
+          <p>{loveinfo.love_color}</p>
+          <p>{loveinfo.love_cake}</p>
           {/* {show ? dataAPI && <Love data={dataAPI} /> : null} */}
           {/* <Love /> */}
         </Modal.Body>
