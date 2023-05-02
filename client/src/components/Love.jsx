@@ -2,7 +2,7 @@ import React from "react";
 import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import * as ioicons from "react-icons/io5";
-// import LoveModal from "./LoveModal";
+import LoveModal from "./LoveModal";
 
 const Love = ({ love, toUpdate, toDelete }) => {
   const onUpdate = (toUpdateLove) => {
@@ -36,7 +36,9 @@ const Love = ({ love, toUpdate, toDelete }) => {
           {" "}
           <ioicons.IoSync />
         </Button>
-        {/* <LoveModal loveName={formSubmissionData.love} /> */}
+        <LoveModal loveinfo={love} />
+
+        {/* <Button> Click for More Info</Button> */}
       </Card.Body>
     </Card>
   );

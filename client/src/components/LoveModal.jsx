@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 
-function LoveModal({ loveName }) {
+function LoveModal({ loveinfo }) {
   const [show, setShow] = useState(false);
   //   const [dataAPI, setdataAPI] = useState(null);
 
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
     // handleSubmit(e);
-    loadLove(loveName);
+
     setShow(true);
   };
 
@@ -39,7 +39,7 @@ function LoveModal({ loveName }) {
           <Modal.Title>Info about your love:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-          {" "}
+          {loveinfo.is_family} {loveinfo.love_birthday}{" "}
           {/* {show ? dataAPI && <Love data={dataAPI} /> : null} */}
           {/* <Love /> */}
         </Modal.Body>
