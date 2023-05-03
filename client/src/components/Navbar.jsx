@@ -17,10 +17,10 @@ function MyNavBar(props) {
               alt="React Bootstrap logo"
             />
           </Navbar.Brand>
-          <Nav.Link>All Your Loves </Nav.Link>
+          <Nav.Link href="/loves">All Your Loves </Nav.Link>
           <Nav.Link>Add A Love</Nav.Link>
-          <Nav.Link>Family</Nav.Link>
-          <Nav.Link>Friends</Nav.Link>
+          <Nav.Link href="/family">Family</Nav.Link>
+          <Nav.Link href="/friends">Friends</Nav.Link>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>

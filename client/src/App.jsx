@@ -8,8 +8,8 @@ import ListLoves from "./components/ListLoves";
 function App() {
   return (
     <div className="App">
-      <AvatarPreview />
       <MyNavBar></MyNavBar>
+      <AvatarPreview />
       <ListLoves />
     </div>
   );
