@@ -10,6 +10,7 @@
     "test": "vitest"
   },
   "dependencies": {
+    "@dicebear/adventurer": "^6.0.3",
     "bootstrap": "^5.2.3",
     "moment": "^2.29.4",
     "react": "^18.2.0",
