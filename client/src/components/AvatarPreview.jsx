@@ -1,13 +1,36 @@
 import React from "react";
 import * as adventurer from "@dicebear/adventurer";
 import { createAvatar } from "@dicebear/core";
+import { useState } from "react";
+
+{
+  /* //onchange, several states (could do it as a single state too)
+//could use a reducer too */
+}
 
 const AvatarPreview = () => {
+  const [hair, setHair] = useState("long1884");
+
+  const [eyes, setEyes] = useState("variant26");
+
+  const [mouth, setMouth] = useState("variant02");
+
+  const updateAvatarPreview = (update) => {
+    return (event) => {
+      update(event.currentTarget.value); //update coming in as argument from line 20
+      //returning an arrow function, that arrow function
+      //current Target is what dom element has triggered this event
+      //and our event is the onchange!
+      //update is which state function u want to call.
+      //this will have onchange event
+    };
+  };
+
   return (
     <div>
       <label>
         Hair:
-        <select name="" id="">
+        <select onChange={updateAvatarPreview(setHair)} name="" id="">
           {adventurer.schema.properties.hair.items.enum.map((variant) => (
             <option>{variant}</option>
           ))}
@@ -16,27 +39,25 @@ const AvatarPreview = () => {
       </label>
 
       <label> Eyes: </label>
-      <select name="" id="">
+      <select onChange={updateAvatarPreview(setEyes)} name="" id="">
         {adventurer.schema.properties.eyes.items.enum.map((variant) => (
           <option>{variant}</option>
         ))}
       </select>
 
       <label>Mouth:</label>
-      <select name="" id="">
+      <select onChange={updateAvatarPreview(setMouth)} name="" id="">
         {adventurer.schema.properties.mouth.items.enum.map((variant) => (
           <option>{variant}</option>
         ))}
       </select>
 
-      {/* //onchange, several states (could do it as a single state too)
-//could use a reducer too */}
       <img
         src={createAvatar(adventurer, {
           size: 128,
-          hair: ["long1884"],
-          mouth: ["variant02"],
-          eyes: [],
+          hair: [hair],
+          mouth: [mouth],
+          eyes: [eyes],
         }).toDataUriSync()}
       />
     </div>
