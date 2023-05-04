@@ -29,10 +29,14 @@ const AvatarPreview = () => {
         ))}
       </select>
 
+      {/* //onchange, several states (could do it as a single state too)
+//could use a reducer too */}
       <img
         src={createAvatar(adventurer, {
           size: 128,
-          hair: "short16",
+          hair: ["long1884"],
+          mouth: ["variant02"],
+          eyes: [],
         }).toDataUriSync()}
       />
     </div>
