@@ -62,7 +62,7 @@ app.post("/api/loves", async (req, res) => {
 app.delete("/api/loves/:love_id", async (req, res) => {
   try {
     const love_id = req.params.love_id;
-    await db.query("DELETE FROM students WHERE id=$1", [love_id]);
+    await db.query("DELETE FROM loves WHERE love_id=$1", [love_id]);
     console.log("From the delete request-url", love_id);
     res.status(200).end();
   } catch (e) {

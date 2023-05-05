@@ -15,6 +15,8 @@ const AvatarPreview = () => {
 
   const [mouth, setMouth] = useState("variant02");
 
+  const [skin, setSkinColor] = useState("");
+
   const updateAvatarPreview = (update) => {
     return (event) => {
       update(event.currentTarget.value); //update coming in as argument from line 20
@@ -52,12 +54,21 @@ const AvatarPreview = () => {
         ))}
       </select>
 
+      {/* The skin colors dont exist on adventurer API */}
+      <label>Skin:</label>
+      <select onChange={updateAvatarPreview(setSkinColor)} name="" id="">
+        {["f2d3b1", "ecad80", "9e5622", "763900", "99999"].map((variant) => (
+          <option>{variant}</option>
+        ))}
+      </select>
+
       <img
         src={createAvatar(adventurer, {
           size: 128,
           hair: [hair],
           mouth: [mouth],
           eyes: [eyes],
+          skinColor: [skin],
         }).toDataUriSync()}
       />
     </div>

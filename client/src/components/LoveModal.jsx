@@ -40,7 +40,7 @@ function LoveModal({ loveinfo }) {
         </Modal.Header>
         <Modal.Body>
           <p>{loveinfo.is_family}</p>
-          <p> {loveinfo.love_birthday.slice(0, 10)}</p>
+          <p> {loveinfo.love_birthday?.slice(0, 10)}</p>
           <p> {loveinfo.love_flower}</p>
           <p>{loveinfo.love_color}</p>
           <p>{loveinfo.love_cake}</p>
