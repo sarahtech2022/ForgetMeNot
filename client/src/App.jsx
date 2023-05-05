@@ -9,8 +9,9 @@ function App() {
   return (
     <div className="App">
       <MyNavBar></MyNavBar>
-      <AvatarPreview />
+
       <ListLoves />
+      <AvatarPreview />
     </div>
   );
 }
