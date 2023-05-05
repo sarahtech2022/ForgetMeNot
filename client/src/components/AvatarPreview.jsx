@@ -17,6 +17,8 @@ const AvatarPreview = () => {
 
   const [skin, setSkinColor] = useState("8C644D");
 
+  const [hairColor, setHairColor] = useState("8C644D");
+
   const updateAvatarPreview = (update) => {
     return (event) => {
       update(event.currentTarget.value); //update coming in as argument from line 20
@@ -39,6 +41,22 @@ const AvatarPreview = () => {
           {/* {schema.properties.eyes.items.enum} */}
         </select>
       </label>
+
+      {/* The skin colors dont exist on adventurer API */}
+      <label>Hair Color:</label>
+      <select onChange={updateAvatarPreview(setHairColor)} name="" id="">
+        {[
+          "0e0e0e",
+          "3eac2c",
+          "8C644D",
+          "BF9169",
+          "562306",
+          "562454",
+          "6a4e35",
+        ].map((variant) => (
+          <option>{variant}</option>
+        ))}
+      </select>
 
       <label> Eyes: </label>
       <select onChange={updateAvatarPreview(setEyes)} name="" id="">
@@ -90,6 +108,7 @@ const AvatarPreview = () => {
         src={createAvatar(adventurer, {
           size: 128,
           hair: [hair],
+          hairColor: [hairColor],
           mouth: [mouth],
           eyes: [eyes],
           skinColor: [skin],
