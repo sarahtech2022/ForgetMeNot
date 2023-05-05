@@ -50,9 +50,17 @@ const AvatarPreview = () => {
           "3eac2c",
           "8C644D",
           "BF9169",
+          "85c2c6",
           "562306",
           "562454",
           "6a4e35",
+          "ac6511",
+          "b9a05f",
+          "afafaf",
+          "cb6820",
+          "dba3be",
+          "e5d7a3",
+          "ab2a18",
         ].map((variant) => (
           <option>{variant}</option>
         ))}
