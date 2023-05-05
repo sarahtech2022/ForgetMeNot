@@ -9,13 +9,13 @@ import { useState } from "react";
 }
 
 const AvatarPreview = () => {
-  const [hair, setHair] = useState("long1884");
+  const [hair, setHair] = useState("short01");
 
-  const [eyes, setEyes] = useState("variant26");
+  const [eyes, setEyes] = useState("variant01");
 
-  const [mouth, setMouth] = useState("variant02");
+  const [mouth, setMouth] = useState("variant01");
 
-  const [skin, setSkinColor] = useState("");
+  const [skin, setSkinColor] = useState("8C644D");
 
   const updateAvatarPreview = (update) => {
     return (event) => {
@@ -58,6 +58,7 @@ const AvatarPreview = () => {
       <label>Skin:</label>
       <select onChange={updateAvatarPreview(setSkinColor)} name="" id="">
         {[
+          "8C644D",
           "BF9169",
           "ecad80",
           "503335",
@@ -78,7 +79,7 @@ const AvatarPreview = () => {
           "FFCD94",
           "EAC086",
           "FFE39F",
-          "8C644D",
+
           "593123",
         ].map((variant) => (
           <option>{variant}</option>
