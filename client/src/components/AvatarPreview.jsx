@@ -57,7 +57,30 @@ const AvatarPreview = () => {
       {/* The skin colors dont exist on adventurer API */}
       <label>Skin:</label>
       <select onChange={updateAvatarPreview(setSkinColor)} name="" id="">
-        {["f2d3b1", "ecad80", "9e5622", "763900", "99999"].map((variant) => (
+        {[
+          "BF9169",
+          "ecad80",
+          "503335",
+          "9e5622",
+          "FFE0BD",
+          "763900",
+          "321B0F",
+          "592f2a",
+          "c58c85",
+          "ecbcb4",
+          "eebb99",
+          "f2d3b1",
+          "9F7967",
+          "D7B6A5",
+          "70361C",
+          "714937",
+          "492816",
+          "FFCD94",
+          "EAC086",
+          "FFE39F",
+          "8C644D",
+          "593123",
+        ].map((variant) => (
           <option>{variant}</option>
         ))}
       </select>

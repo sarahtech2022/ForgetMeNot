@@ -7,6 +7,8 @@ const ListLoves = () => {
   // this is my original state with an array of loves
   const [loves, setLoves] = useState([]);
 
+  //This is the state that will store all the avatar final details.
+
   //this is the state needed for the UpdateRequest
   const [editingLove, setEditingLove] = useState(null);
 
