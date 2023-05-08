@@ -1,10 +1,12 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-// import Logo from "../assets/BlueTechtonicaWord.png";
 import Logo from "../assets/ForgetMeNot logo.png";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function MyNavBar(props) {
+  const { loginWithRedirect } = useAuth0();
+
   return (
     <>
       <Navbar data-testid="navbar" bg="white" variant="white" sticky="top">
@@ -24,7 +26,7 @@ function MyNavBar(props) {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <a href="#login">Sarah</a>
+              <button onClick={() => loginWithRedirect()}>Log In</button>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

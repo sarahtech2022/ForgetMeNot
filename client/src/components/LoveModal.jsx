@@ -44,6 +44,7 @@ function LoveModal({ loveinfo }) {
           <p> {loveinfo.love_flower}</p>
           <p>{loveinfo.love_color}</p>
           <p>{loveinfo.love_cake}</p>
+
           {/* {show ? dataAPI && <Love data={dataAPI} /> : null} */}
           {/* <Love /> */}
         </Modal.Body>
