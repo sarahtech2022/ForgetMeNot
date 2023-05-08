@@ -9,7 +9,7 @@ import Friends from "./components/Friends";
 import { Auth0Provider } from "@auth0/auth0-react";
 
 const DOMAIN = import.meta.env.VITE_AUTH0_DOMAIN;
-const CLIENTID = import.meta.env.VITE_AUTH0_CLIENTID;
+const CLIENTID = import.meta.env.VITE_AUTH0_CLIENT_ID;
 
 console.log(DOMAIN, "This is my DOMAIN");
 
