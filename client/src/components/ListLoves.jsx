@@ -14,7 +14,7 @@ const ListLoves = () => {
 
   const loadLoves = () => {
     // A function to fetch the list of loves that will be load anytime that list change
-    fetch("http://localhost:8080/api/loves")
+    fetch("/api/loves")
       .then((response) => response.json())
       .then((loves) => {
         setLoves(loves);
@@ -40,7 +40,7 @@ const ListLoves = () => {
   //A function to handle the Delete funtionality
   const onDelete = (love) => {
     //console.log(love, "delete method")
-    return fetch(`http://localhost:8080/api/loves/${love.love_id}`, {
+    return fetch(`/api/loves/${love.love_id}`, {
       method: "DELETE",
     }).then((response) => {
       //console.log(response);

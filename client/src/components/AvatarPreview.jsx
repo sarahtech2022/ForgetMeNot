@@ -8,7 +8,7 @@ import { useState } from "react";
 //could use a reducer too */
 }
 
-const AvatarPreview = () => {
+const AvatarPreview = ({ onChange }) => {
   const [hair, setHair] = useState("short01");
 
   const [eyes, setEyes] = useState("variant01");
@@ -27,6 +27,7 @@ const AvatarPreview = () => {
       //and our event is the onchange!
       //update is which state function u want to call.
       //this will have onchange event
+      onChange({ hair, eyes, mouth, skin });
     };
   };
 

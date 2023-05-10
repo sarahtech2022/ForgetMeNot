@@ -5,13 +5,17 @@ const path = require("path");
 const db = require("./db/db-connection.js");
 
 const app = express();
+const REACT_BUILD_DIR = path.join(__dirname, "..", "client", "dist");
+app.use(express.static(REACT_BUILD_DIR));
+
 const PORT = process.env.PORT || 8080;
 app.use(cors());
 app.use(express.json());
 
 // creates an endpoint for the route "/""
 app.get("/", (req, res) => {
-  res.json({ message: "Hola, from My template ExpressJS with React-Vite" });
+  //   res.json({ message: "Hola, from My template ExpressJS with React-Vite" });
+  res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
 // create the get request for students in the endpoint '/api/students'
@@ -24,7 +28,7 @@ app.get("/api/loves", async (req, res) => {
   }
 });
 
-// create the POST request
+// create the POST request for love details in loves table
 app.post("/api/loves", async (req, res) => {
   console.log(req.body);
   try {
@@ -57,6 +61,32 @@ app.post("/api/loves", async (req, res) => {
     return res.status(400).json({ e });
   }
 });
+//********************************************************************** */
+
+// create the POST request for avatar details in avatar table
+app.post("/api/avatars", async (req, res) => {
+  console.log(req.body);
+  try {
+    const newAvatar = {
+      hair: req.body.hair,
+      eyes: req.body.eyes,
+      mouth: req.body.mouth,
+      skin: req.body.skin,
+    };
+    //console.log([newAvatar.hair,newAvatar.eyes, newAvatar.mouth, newAvatar.skin]);
+    const result = await db.query(
+      "INSERT INTO avatars(hair, eyes, mouth, skin) VALUES($1, $2, $3, $4) RETURNING *",
+      [newAvatar.hair, newAvatar.eyes, newAvatar.mouth, newAvatar.skin]
+    );
+    console.log(result.rows[0]);
+    res.json(result.rows[0]);
+  } catch (e) {
+    console.log(e);
+    return res.status(400).json({ e });
+  }
+});
+
+//********************************************************************** */
 
 // delete request for loves
 app.delete("/api/loves/:love_id", async (req, res) => {
