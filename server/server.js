@@ -18,10 +18,12 @@ app.get("/", (req, res) => {
   res.sendFile(path.join(REACT_BUILD_DIR, "index.html"));
 });
 
-// create the get request for students in the endpoint '/api/students'
+// create the get request for loves and avatars*** in the endpoint '/api/loves'
 app.get("/api/loves", async (req, res) => {
   try {
-    const { rows: loves } = await db.query("SELECT * FROM loves");
+    const { rows: loves } = await db.query(
+      "SELECT * FROM loves INNER JOIN avatars ON avatars.avatar_id=loves.avatar_id"
+    );
     res.send(loves);
   } catch (e) {
     return res.status(400).json({ e });
@@ -61,6 +63,21 @@ app.post("/api/loves", async (req, res) => {
     return res.status(400).json({ e });
   }
 });
+
+//**************** */
+
+// create the get request for avatars in the endpoint '/api/avatars'
+app.get("/api/avatars", async (req, res) => {
+  try {
+    const { rows: avatars } = await db.query("SELECT * FROM avatars");
+    res.send(avatars);
+  } catch (e) {
+    return res.status(400).json({ e });
+  }
+});
+
+//**************** */
+
 //********************************************************************** */
 
 // create the POST request for avatar details in avatar table

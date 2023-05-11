@@ -21,9 +21,23 @@ const ListLoves = () => {
       });
   };
 
+  // //******************** */
+  // const loadAvatar = () => {
+  //   // A function to fetch the list of avatars that will be load anytime that list change
+  //   fetch("/api/avatars")
+  //     .then((response) => response.json())
+  //     .then((avatar) => {
+  //       setAvatar(avatar);
+  //     });
+  // };
+  // //******************** */
+
   useEffect(() => {
     loadLoves();
   }, []); //leave empty
+  // run that function, can also take an array of things (only reruns when there is an array of things)
+  //only runs once by default
+  //We dont want to keep calling this function every time, we just want it once
 
   const onSaveLove = (newLove) => {
     console.log(newLove, "From the parent - List of Loves");
@@ -35,6 +49,7 @@ const ListLoves = () => {
     // console.log("Line 29 savedLove", savedLove);
     // This function should update the whole list of loves -
     loadLoves();
+    loadAvatars();
   };
 
   //A function to handle the Delete funtionality
