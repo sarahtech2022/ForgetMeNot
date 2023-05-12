@@ -44,11 +44,18 @@ app.post("/api/loves", async (req, res) => {
           eyes: req.body.eyes,
           mouth: req.body.mouth,
           skin: req.body.skin,
+          hair_color: req.hair_color,
         };
         //avatar variable is inserting into the table so that vairable has the avatar_id stored in it
         const avatar = await t.one(
-          "INSERT INTO avatars(hair, eyes, mouth, skin) VALUES($1, $2, $3, $4) RETURNING *",
-          [newAvatar.hair, newAvatar.eyes, newAvatar.mouth, newAvatar.skin]
+          "INSERT INTO avatars(hair, eyes, mouth, skin, hair_color) VALUES($1, $2, $3, $4, $5) RETURNING *",
+          [
+            newAvatar.hair,
+            newAvatar.eyes,
+            newAvatar.mouth,
+            newAvatar.skin,
+            newAvatar.hair_color,
+          ]
         );
         const newLove = {
           love_name: req.body.love_name,

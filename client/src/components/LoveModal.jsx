@@ -85,6 +85,7 @@ function LoveModal({ loveinfo }) {
                 mouth: [loveinfo.mouth],
                 eyes: [loveinfo.eyes],
                 skinColor: [loveinfo.skin],
+                hairColor: [loveinfo.hair_color],
               }).toDataUriSync()}
             />
           </p>
