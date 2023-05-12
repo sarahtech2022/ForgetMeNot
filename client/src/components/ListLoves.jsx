@@ -18,6 +18,9 @@ const ListLoves = () => {
       .then((response) => response.json())
       .then((loves) => {
         setLoves(loves);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
 
@@ -49,7 +52,6 @@ const ListLoves = () => {
     // console.log("Line 29 savedLove", savedLove);
     // This function should update the whole list of loves -
     loadLoves();
-    loadAvatars();
   };
 
   //A function to handle the Delete funtionality

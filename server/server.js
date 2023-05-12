@@ -21,7 +21,7 @@ app.get("/", (req, res) => {
 // create the get request for loves and avatars*** in the endpoint '/api/loves'
 app.get("/api/loves", async (req, res) => {
   try {
-    const { rows: loves } = await db.query(
+    const loves = await db.query(
       "SELECT * FROM loves INNER JOIN avatars ON avatars.avatar_id=loves.avatar_id"
     );
     res.send(loves);
@@ -30,78 +30,139 @@ app.get("/api/loves", async (req, res) => {
   }
 });
 
-// create the POST request for love details in loves table
+// %%%%%%%%%*****Create a transcation for the post request for the loves and the avatars at once! (we use transcations since its two or more tables we need to insert into)
 app.post("/api/loves", async (req, res) => {
-  console.log(req.body);
-  try {
-    const newLove = {
-      love_name: req.body.love_name,
-      is_family: req.body.is_family,
-      love_met: req.body.love_met,
-      love_birthday: req.body.love_birthday,
-      love_flower: req.body.love_flower,
-      love_color: req.body.love_color,
-      love_cake: req.body.love_cake,
-    };
-    //console.log([newLove.love_name, newLove.is_family, newLove.love_met]);
-    const result = await db.query(
-      "INSERT INTO loves(love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-      [
-        newLove.love_name,
-        newLove.is_family,
-        newLove.love_met,
-        newLove.love_birthday,
-        newLove.love_flower,
-        newLove.love_color,
-        newLove.love_cake,
-      ]
-    );
-    console.log(result.rows[0]);
-    res.json(result.rows[0]);
-  } catch (e) {
-    console.log(e);
-    return res.status(400).json({ e });
-  }
+  db.connect().then((dbclient) =>
+    dbclient
+      .task(async (t) => {
+        // creating a sequence of transaction queries:
+        //t.none means no return value to be expected, if something is returned then something went wrong!
+        //t.one is what were expecting to return soemthing, we probably wanna return one value
+        //first query to create avatar in avatar table
+        const newAvatar = {
+          hair: req.body.hair,
+          eyes: req.body.eyes,
+          mouth: req.body.mouth,
+          skin: req.body.skin,
+        };
+        //avatar variable is inserting into the table so that vairable has the avatar_id stored in it
+        const avatar = await t.one(
+          "INSERT INTO avatars(hair, eyes, mouth, skin) VALUES($1, $2, $3, $4) RETURNING *",
+          [newAvatar.hair, newAvatar.eyes, newAvatar.mouth, newAvatar.skin]
+        );
+        const newLove = {
+          love_name: req.body.love_name,
+          is_family: req.body.is_family,
+          love_met: req.body.love_met,
+          love_birthday: req.body.love_birthday,
+          love_flower: req.body.love_flower,
+          love_color: req.body.love_color,
+          love_cake: req.body.love_cake,
+        };
+
+        const love = await t.one(
+          "INSERT INTO loves(love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, avatar_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+          [
+            newLove.love_name,
+            newLove.is_family,
+            newLove.love_met,
+            newLove.love_birthday,
+            newLove.love_flower,
+            newLove.love_color,
+            newLove.love_cake,
+            avatar.avatar_id,
+          ]
+        );
+        return { avatar, love };
+      })
+      .then((data) => {
+        res.json({ ...data.avatar, ...data.love }); //putting all into one object!
+        // success, COMMIT was executed
+      })
+      .catch((error) => {
+        console.log(error);
+        // failure, ROLLBACK was executed
+      })
+  );
 });
+
+/////////////////
+
+//********** */
+// `insert into games(post_id, game_name, title, console, rating, recommendation, username, post, image_url) values(nextval('id_seq'), $1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
+
+// create the POST request for love details in loves table
+// app.post("/api/loves", async (req, res) => {
+//   console.log(req.body);
+//   try {
+//     const newLove = {
+//       love_name: req.body.love_name,
+//       is_family: req.body.is_family,
+//       love_met: req.body.love_met,
+//       love_birthday: req.body.love_birthday,
+//       love_flower: req.body.love_flower,
+//       love_color: req.body.love_color,
+//       love_cake: req.body.love_cake,
+//     };
+//     //console.log([newLove.love_name, newLove.is_family, newLove.love_met]);
+//     const result = await db.query(
+//       "INSERT INTO loves(love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+//       [
+//         newLove.love_name,
+//         newLove.is_family,
+//         newLove.love_met,
+//         newLove.love_birthday,
+//         newLove.love_flower,
+//         newLove.love_color,
+//         newLove.love_cake,
+//       ]
+//     );
+//     console.log(result.rows[0]);
+//     res.json(result.rows[0]);
+//   } catch (e) {
+//     console.log(e);
+//     return res.status(400).json({ e });
+//   }
+// });
 
 //**************** */
 
-// create the get request for avatars in the endpoint '/api/avatars'
-app.get("/api/avatars", async (req, res) => {
-  try {
-    const { rows: avatars } = await db.query("SELECT * FROM avatars");
-    res.send(avatars);
-  } catch (e) {
-    return res.status(400).json({ e });
-  }
-});
+// // create the get request for avatars in the endpoint '/api/avatars'
+// app.get("/api/avatars", async (req, res) => {
+//   try {
+//     const { rows: avatars } = await db.query("SELECT * FROM avatars");
+//     res.send(avatars);
+//   } catch (e) {
+//     return res.status(400).json({ e });
+//   }
+// });
 
-//**************** */
+// //**************** */
 
 //********************************************************************** */
 
 // create the POST request for avatar details in avatar table
-app.post("/api/avatars", async (req, res) => {
-  console.log(req.body);
-  try {
-    const newAvatar = {
-      hair: req.body.hair,
-      eyes: req.body.eyes,
-      mouth: req.body.mouth,
-      skin: req.body.skin,
-    };
-    //console.log([newAvatar.hair,newAvatar.eyes, newAvatar.mouth, newAvatar.skin]);
-    const result = await db.query(
-      "INSERT INTO avatars(hair, eyes, mouth, skin) VALUES($1, $2, $3, $4) RETURNING *",
-      [newAvatar.hair, newAvatar.eyes, newAvatar.mouth, newAvatar.skin]
-    );
-    console.log(result.rows[0]);
-    res.json(result.rows[0]);
-  } catch (e) {
-    console.log(e);
-    return res.status(400).json({ e });
-  }
-});
+// app.post("/api/avatars", async (req, res) => {
+//   console.log(req.body);
+//   try {
+//     const newAvatar = {
+//       hair: req.body.hair,
+//       eyes: req.body.eyes,
+//       mouth: req.body.mouth,
+//       skin: req.body.skin,
+//     };
+//     //console.log([newAvatar.hair,newAvatar.eyes, newAvatar.mouth, newAvatar.skin]);
+//     const result = await db.query(
+//       "INSERT INTO avatars(hair, eyes, mouth, skin) VALUES($1, $2, $3, $4) RETURNING *",
+//       [newAvatar.hair, newAvatar.eyes, newAvatar.mouth, newAvatar.skin]
+//     );
+//     console.log(result.rows[0]);
+//     res.json(result.rows[0]);
+//   } catch (e) {
+//     console.log(e);
+//     return res.status(400).json({ e });
+//   }
+// });
 
 //********************************************************************** */
 
@@ -152,8 +213,8 @@ app.put("/api/loves/:love_id", async (req, res) => {
   ];
   try {
     const updated = await db.query(query, values);
-    console.log(updated.rows[0]);
-    res.send(updated.rows[0]);
+    console.log(updated[0]);
+    res.send(updated[0]);
   } catch (e) {
     console.log(e);
     return res.status(400).json({ e });

@@ -106,27 +106,27 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
       });
   };
 
-  //******************************************* */
-  //A function to handle the post request for avatar
-  const postAvatar = (newAvatar) => {
-    console.log("reached Post Request", newAvatar);
-    return fetch("/api/avatars", {
-      method: "POST",
-      headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newAvatar),
-    })
-      .then((response) => {
-        return response.json();
-      })
-      .then((data) => {
-        console.log("From the post ", data);
-        //I'm sending data to the List of Loves (the parent) for updating the list
-        onSaveLove(data);
-        //this line just for cleaning the form
-        clearForm();
-      });
-  };
-  //************************************** */
+  // //******************************************* */
+  // //A function to handle the post request for avatar
+  // const postAvatar = (newAvatar) => {
+  //   console.log("reached Post Request", newAvatar);
+  //   return fetch("/api/avatars", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(newAvatar),
+  //   })
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log("From the post ", data);
+  //       //I'm sending data to the List of Loves (the parent) for updating the list
+  //       onSaveLove(data);
+  //       //this line just for cleaning the form
+  //       clearForm();
+  //     });
+  // };
+  // //************************************** */
 
   //A function to handle the post request
   const putLove = (toEditLove) => {
@@ -152,7 +152,6 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
       putLove(love);
     } else {
       postLove(love);
-      postAvatar(love);
     }
   };
 
