@@ -44,11 +44,37 @@ function LoveModal({ loveinfo }) {
         </Modal.Header>
         <Modal.Body>
           <p>{loveinfo.is_family}</p>
-          <p> {loveinfo.love_birthday?.slice(0, 10)}</p>
-          <p> {loveinfo.love_flower}</p>
-          <p>{loveinfo.love_color}</p>
-          <p>{loveinfo.love_cake}</p>
-          <p>{loveinfo.hair}</p>
+          <p>
+            <img
+              width={30}
+              src="https://cdn-icons-png.flaticon.com/128/7228/7228079.png"
+            ></img>
+            {loveinfo.love_birthday?.slice(0, 10)}
+          </p>
+          <p>
+            {" "}
+            <img
+              width={30}
+              src="https://cdn-icons-png.flaticon.com/128/4642/4642381.png"
+            ></img>{" "}
+            {loveinfo.love_flower}
+          </p>
+          <p>
+            {" "}
+            <img
+              width={30}
+              src="https://cdn-icons-png.flaticon.com/128/2071/2071524.png"
+            ></img>
+            {loveinfo.love_color}
+          </p>
+          <p>
+            <img
+              width={30}
+              src="https://cdn-icons-png.flaticon.com/128/2454/2454297.png"
+            ></img>
+            {loveinfo.love_cake}
+          </p>
+          <p></p>
 
           <p>
             {" "}
@@ -58,6 +84,7 @@ function LoveModal({ loveinfo }) {
                 hair: [loveinfo.hair],
                 mouth: [loveinfo.mouth],
                 eyes: [loveinfo.eyes],
+                skinColor: [loveinfo.skin],
               }).toDataUriSync()}
             />
           </p>
