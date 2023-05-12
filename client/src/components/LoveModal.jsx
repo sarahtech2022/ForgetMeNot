@@ -44,6 +44,22 @@ function LoveModal({ loveinfo }) {
         </Modal.Header>
         <Modal.Body>
           <p>{loveinfo.is_family}</p>
+
+          <p>
+            {" "}
+            <img
+              src={createAvatar(adventurer, {
+                size: 128,
+                hair: [loveinfo.hair],
+                mouth: [loveinfo.mouth],
+                eyes: [loveinfo.eyes],
+                skinColor: [loveinfo.skin],
+                hairColor: [loveinfo.hair_color],
+              }).toDataUriSync()}
+            />
+          </p>
+          <p></p>
+
           <p>
             <img
               width={30}
@@ -75,20 +91,6 @@ function LoveModal({ loveinfo }) {
             {loveinfo.love_cake}
           </p>
           <p></p>
-
-          <p>
-            {" "}
-            <img
-              src={createAvatar(adventurer, {
-                size: 128,
-                hair: [loveinfo.hair],
-                mouth: [loveinfo.mouth],
-                eyes: [loveinfo.eyes],
-                skinColor: [loveinfo.skin],
-                hairColor: [loveinfo.hair_color],
-              }).toDataUriSync()}
-            />
-          </p>
 
           {/* {show ? dataAPI && <Love data={dataAPI} /> : null} */}
           {/* <Love /> */}

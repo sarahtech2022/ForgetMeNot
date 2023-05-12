@@ -3,6 +3,8 @@ import Card from "react-bootstrap/Card";
 import Button from "react-bootstrap/Button";
 import * as ioicons from "react-icons/io5";
 import LoveModal from "./LoveModal";
+import * as adventurer from "@dicebear/adventurer";
+import { createAvatar } from "@dicebear/core";
 
 const Love = ({ love, toUpdate, toDelete }) => {
   const onUpdate = (toUpdateLove) => {
@@ -16,7 +18,22 @@ const Love = ({ love, toUpdate, toDelete }) => {
   return (
     <Card>
       <Card.Body>
-        <Card.Title>{love.love_name}</Card.Title>
+        <Card.Title>
+          <p>{love.love_name}</p>{" "}
+          <p>
+            {" "}
+            <img
+              src={createAvatar(adventurer, {
+                size: 128,
+                hair: [love.hair],
+                mouth: [love.mouth],
+                eyes: [love.eyes],
+                skinColor: [love.skin],
+                hairColor: [love.hair_color],
+              }).toDataUriSync()}
+            />
+          </p>
+        </Card.Title>
         <Button
           variant="outline-danger"
           onClick={() => {
