@@ -237,6 +237,8 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
         />
       </Form.Group>
 
+      <p> </p>
+      <p> </p>
       <Form.Group>
         <AvatarPreview onChange={handleOnChange} />
       </Form.Group>

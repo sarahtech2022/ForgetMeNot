@@ -15,7 +15,7 @@ const AvatarPreview = ({ onChange }) => {
 
   const [mouth, setMouth] = useState("variant01");
 
-  const [skin, setSkinColor] = useState("8C644D");
+  const [skin, setSkinColor] = useState("BF9169");
 
   const [hairColor, setHairColor] = useState("8C644D");
 
@@ -41,8 +41,7 @@ const AvatarPreview = ({ onChange }) => {
           ))}
           {/* {schema.properties.eyes.items.enum} */}
         </select>
-      </label>
-
+      </label>{" "}
       {/* The skin colors dont exist on adventurer API */}
       <label>Hair Color:</label>
       <select onChange={updateAvatarPreview(setHairColor)} name="" id="">
@@ -66,22 +65,22 @@ const AvatarPreview = ({ onChange }) => {
           <option>{variant}</option>
         ))}
       </select>
-
+      <p></p>
       <label> Eyes: </label>
       <select onChange={updateAvatarPreview(setEyes)} name="" id="">
         {adventurer.schema.properties.eyes.items.enum.map((variant) => (
           <option>{variant}</option>
         ))}
       </select>
-
+      {"         "}
       <label>Mouth:</label>
       <select onChange={updateAvatarPreview(setMouth)} name="" id="">
         {adventurer.schema.properties.mouth.items.enum.map((variant) => (
           <option>{variant}</option>
         ))}
       </select>
-
       {/* The skin colors dont exist on adventurer API */}
+      <p></p>
       <label>Skin:</label>
       <select onChange={updateAvatarPreview(setSkinColor)} name="" id="">
         {[
@@ -112,7 +111,7 @@ const AvatarPreview = ({ onChange }) => {
           <option>{variant}</option>
         ))}
       </select>
-
+      <p></p>
       <img
         src={createAvatar(adventurer, {
           size: 128,
