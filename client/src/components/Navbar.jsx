@@ -1,7 +1,7 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-import Picture from "../assets/ForgetMeNot logo.png";
+import Logo from "../assets/LOGO.png";
 import { useAuth0 } from "@auth0/auth0-react";
 
 function MyNavBar(props) {
@@ -13,7 +13,8 @@ function MyNavBar(props) {
         <Container>
           <Navbar.Brand href="/">
             <img
-              src={Picture}
+              
+              src={Logo}
               height="100"
               className="d-lg-inline-block"
               alt="React Bootstrap logo"

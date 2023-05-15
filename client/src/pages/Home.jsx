@@ -7,7 +7,6 @@ const Home = () => {
   const { loginWithRedirect } = useAuth0();
   return (
     <div>
-      "Home"
       <ListLoves />
     </div>
   );
