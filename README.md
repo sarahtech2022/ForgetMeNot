@@ -60,13 +60,19 @@ Forget Me Not is the ultimate app for never forgetting important details about y
         <img src="https://user-images.githubusercontent.com/74997368/168980647-1690f9de-bf0e-4318-93cb-1b2ba3701ded.png" width="48" height="48" alt="Bootstrap" />
       <br>Bootstrap
     </td>
-    <td align="center" width="96">
-        <img src="https://pbs.twimg.com/profile_images/1337188620222906368/oNKK_fVe_400x400.jpg" width="48" height="48" alt="Render" />
-      <br>Render
-    </td>
+    
   </tr>
 </table>
 
 ## API Reference
 
 [Back to Contents](#contents)
+
+<table align="center">
+  <tr>
+     <td align="center" width="96">
+        <img src="DiceBearAPI.png" width="48" height="48" alt="DiceBear" />
+        <br>Dice Bear
+     </td>
+  </tr>
+</table>
