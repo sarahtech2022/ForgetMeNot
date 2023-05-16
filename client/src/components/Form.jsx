@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
+import AvatarPreview from "../components/AvatarPreview";
 
 const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
   // This is the original State with not initial love
@@ -12,6 +13,10 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
       love_flower: "",
       love_color: "",
       love_cake: "",
+      hair: "",
+      eyes: "",
+      mouth: "",
+      skin: "",
     }
   );
 
@@ -57,6 +62,18 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
     setLove((love) => ({ ...love, love_cake }));
   };
 
+  //********************** */
+  const handleOnChange = (avatarOptions) => {
+    avatarOptions.hair;
+    avatarOptions.eyes;
+    avatarOptions.mouth;
+    avatarOptions.skin;
+    // const hair = event.target.value;
+    setLove((love) => ({ ...love, ...avatarOptions }));
+  };
+
+  //********************** */
+
   const clearForm = () => {
     setLove({
       love_name: "",
@@ -72,7 +89,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
   //A function to handle the post request
   const postLove = (newLove) => {
     console.log("reached Post Request", newLove);
-    return fetch("http://localhost:8080/api/loves", {
+    return fetch("/api/loves", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newLove),
@@ -89,9 +106,31 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
       });
   };
 
+  // //******************************************* */
+  // //A function to handle the post request for avatar
+  // const postAvatar = (newAvatar) => {
+  //   console.log("reached Post Request", newAvatar);
+  //   return fetch("/api/avatars", {
+  //     method: "POST",
+  //     headers: { "Content-Type": "application/json" },
+  //     body: JSON.stringify(newAvatar),
+  //   })
+  //     .then((response) => {
+  //       return response.json();
+  //     })
+  //     .then((data) => {
+  //       console.log("From the post ", data);
+  //       //I'm sending data to the List of Loves (the parent) for updating the list
+  //       onSaveLove(data);
+  //       //this line just for cleaning the form
+  //       clearForm();
+  //     });
+  // };
+  // //************************************** */
+
   //A function to handle the post request
   const putLove = (toEditLove) => {
-    return fetch(`http://localhost:8080/api/loves/${toEditLove.love_id}`, {
+    return fetch(`/api/loves/${toEditLove.love_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(toEditLove),
@@ -196,6 +235,12 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
           value={love.love_cake}
           onChange={handleCakeChange}
         />
+      </Form.Group>
+
+      <p> </p>
+      <p> </p>
+      <Form.Group>
+        <AvatarPreview onChange={handleOnChange} />
       </Form.Group>
 
       <Form.Group>

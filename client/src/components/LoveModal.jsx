@@ -1,6 +1,8 @@
 import React, { useState } from "react";
 import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
+import * as adventurer from "@dicebear/adventurer";
+import { createAvatar } from "@dicebear/core";
 
 function LoveModal({ loveinfo }) {
   const [show, setShow] = useState(false);
@@ -9,9 +11,11 @@ function LoveModal({ loveinfo }) {
   const handleClose = () => setShow(false);
   const handleShow = (e) => {
     // handleSubmit(e);
-
+    console.log(loveinfo, "here is my love info modal");
     setShow(true);
   };
+
+  console.log(loveinfo, "here is my love info");
 
   //A function to do the get request and set the state from openweather api
   //   async function loadLove(love) {
@@ -40,10 +44,54 @@ function LoveModal({ loveinfo }) {
         </Modal.Header>
         <Modal.Body>
           <p>{loveinfo.is_family}</p>
-          <p> {loveinfo.love_birthday?.slice(0, 10)}</p>
-          <p> {loveinfo.love_flower}</p>
-          <p>{loveinfo.love_color}</p>
-          <p>{loveinfo.love_cake}</p>
+
+          <p>
+            {" "}
+            <img
+              src={createAvatar(adventurer, {
+                size: 128,
+                hair: [loveinfo.hair],
+                mouth: [loveinfo.mouth],
+                eyes: [loveinfo.eyes],
+                skinColor: [loveinfo.skin],
+                hairColor: [loveinfo.hair_color],
+              }).toDataUriSync()}
+            />
+          </p>
+          <p></p>
+
+          <p>
+            <img
+              width={30}
+              src="https://cdn-icons-png.flaticon.com/128/7228/7228079.png"
+            ></img>
+            {loveinfo.love_birthday?.slice(0, 10)}
+          </p>
+          <p>
+            {" "}
+            <img
+              width={30}
+              src="https://cdn-icons-png.flaticon.com/128/4642/4642381.png"
+            ></img>{" "}
+            {loveinfo.love_flower}
+          </p>
+          <p>
+            {" "}
+            <img
+              width={30}
+              src="https://cdn-icons-png.flaticon.com/128/2071/2071524.png"
+            ></img>
+            {loveinfo.love_color}
+          </p>
+          <p>
+            <img
+              width={30}
+              src="https://cdn-icons-png.flaticon.com/128/2454/2454297.png"
+            ></img>
+            {loveinfo.love_cake}
+          </p>
+          <p></p>
+
           {/* {show ? dataAPI && <Love data={dataAPI} /> : null} */}
           {/* <Love /> */}
         </Modal.Body>

@@ -8,14 +8,14 @@ import { useState } from "react";
 //could use a reducer too */
 }
 
-const AvatarPreview = () => {
+const AvatarPreview = ({ onChange }) => {
   const [hair, setHair] = useState("short01");
 
   const [eyes, setEyes] = useState("variant01");
 
   const [mouth, setMouth] = useState("variant01");
 
-  const [skin, setSkinColor] = useState("8C644D");
+  const [skin, setSkinColor] = useState("BF9169");
 
   const [hairColor, setHairColor] = useState("8C644D");
 
@@ -27,6 +27,7 @@ const AvatarPreview = () => {
       //and our event is the onchange!
       //update is which state function u want to call.
       //this will have onchange event
+      onChange({ hair, eyes, mouth, skin });
     };
   };
 
@@ -40,8 +41,7 @@ const AvatarPreview = () => {
           ))}
           {/* {schema.properties.eyes.items.enum} */}
         </select>
-      </label>
-
+      </label>{" "}
       {/* The skin colors dont exist on adventurer API */}
       <label>Hair Color:</label>
       <select onChange={updateAvatarPreview(setHairColor)} name="" id="">
@@ -65,22 +65,22 @@ const AvatarPreview = () => {
           <option>{variant}</option>
         ))}
       </select>
-
+      <p></p>
       <label> Eyes: </label>
       <select onChange={updateAvatarPreview(setEyes)} name="" id="">
         {adventurer.schema.properties.eyes.items.enum.map((variant) => (
           <option>{variant}</option>
         ))}
       </select>
-
+      {"         "}
       <label>Mouth:</label>
       <select onChange={updateAvatarPreview(setMouth)} name="" id="">
         {adventurer.schema.properties.mouth.items.enum.map((variant) => (
           <option>{variant}</option>
         ))}
       </select>
-
       {/* The skin colors dont exist on adventurer API */}
+      <p></p>
       <label>Skin:</label>
       <select onChange={updateAvatarPreview(setSkinColor)} name="" id="">
         {[
@@ -111,7 +111,7 @@ const AvatarPreview = () => {
           <option>{variant}</option>
         ))}
       </select>
-
+      <p></p>
       <img
         src={createAvatar(adventurer, {
           size: 128,

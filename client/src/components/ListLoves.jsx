@@ -14,16 +14,33 @@ const ListLoves = () => {
 
   const loadLoves = () => {
     // A function to fetch the list of loves that will be load anytime that list change
-    fetch("http://localhost:8080/api/loves")
+    fetch("/api/loves")
       .then((response) => response.json())
       .then((loves) => {
         setLoves(loves);
+      })
+      .catch((error) => {
+        console.log(error);
       });
   };
+
+  // //******************** */
+  // const loadAvatar = () => {
+  //   // A function to fetch the list of avatars that will be load anytime that list change
+  //   fetch("/api/avatars")
+  //     .then((response) => response.json())
+  //     .then((avatar) => {
+  //       setAvatar(avatar);
+  //     });
+  // };
+  // //******************** */
 
   useEffect(() => {
     loadLoves();
   }, []); //leave empty
+  // run that function, can also take an array of things (only reruns when there is an array of things)
+  //only runs once by default
+  //We dont want to keep calling this function every time, we just want it once
 
   const onSaveLove = (newLove) => {
     console.log(newLove, "From the parent - List of Loves");
@@ -40,7 +57,7 @@ const ListLoves = () => {
   //A function to handle the Delete funtionality
   const onDelete = (love) => {
     //console.log(love, "delete method")
-    return fetch(`http://localhost:8080/api/loves/${love.love_id}`, {
+    return fetch(`/api/loves/${love.love_id}`, {
       method: "DELETE",
     }).then((response) => {
       //console.log(response);

@@ -1,16 +1,19 @@
 import Container from "react-bootstrap/Container";
 import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
-// import Logo from "../assets/BlueTechtonicaWord.png";
-import Logo from "../assets/ForgetMeNot logo.png";
+import Logo from "../assets/LOGO.png";
+import { useAuth0 } from "@auth0/auth0-react";
 
 function MyNavBar(props) {
+  const { logout } = useAuth0();
+
   return (
     <>
       <Navbar data-testid="navbar" bg="white" variant="white" sticky="top">
         <Container>
           <Navbar.Brand href="/">
             <img
+              
               src={Logo}
               height="100"
               className="d-lg-inline-block"
@@ -24,7 +27,7 @@ function MyNavBar(props) {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              Signed in as: <a href="#login">Sarah</a>
+              <button onClick={() => logout()}>Log Out</button>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>
