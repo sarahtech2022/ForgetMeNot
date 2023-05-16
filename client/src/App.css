@@ -21,8 +21,10 @@ a.navbar-brand {
 
 .list-students {
   text-align: center;
-  margin-top: 25px;
-  flex: 1
+  /* margin-top: 30px; */
+  flex: 1;
+  /* display: grid;
+  grid-template-columns: repeat(3, 1fr); */
 }
 
 ul {
@@ -43,12 +45,13 @@ form{
   flex-direction: column;
     align-items: center;
     text-align: left;
-    margin-top: 3em;
+    margin-top: 10%;
     flex: 1;
+    height: 800px;
   max-width: 450px;
     font-family: "Lucida Sans Unicode", "Lucida Grande", sans-serif;
     display: block;
-      margin-bottom: 10px;
+      /* margin-bottom: 10px; */
       float: left;
         width: 400px;
         color: #F072A9;
@@ -99,6 +102,21 @@ button.btn.btn-primary {
 }
 
 .card-body {
-  margin-left: 2em;
-  margin-right: 2em;
+  /* margin-left: 2em;
+  margin-right: 2em; */
+  /* height: 400px; */
+  
+}
+
+.gridcontainer{
+  display: grid;
+  grid-template-columns: auto auto auto;
+}
+
+.griditem{
+margin: 5%;
+}
+
+.form-students{
+  margin-top: 52px;
 }
