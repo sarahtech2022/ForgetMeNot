@@ -24,17 +24,6 @@ const ListLoves = () => {
       });
   };
 
-  // //******************** */
-  // const loadAvatar = () => {
-  //   // A function to fetch the list of avatars that will be load anytime that list change
-  //   fetch("/api/avatars")
-  //     .then((response) => response.json())
-  //     .then((avatar) => {
-  //       setAvatar(avatar);
-  //     });
-  // };
-  // //******************** */
-
   useEffect(() => {
     loadLoves();
   }, []); //leave empty
@@ -77,10 +66,10 @@ const ListLoves = () => {
     <div className="mybody">
       <div className="list-students">
         <h2>My Loves </h2>
-        <ul>
+        <div className="gridcontainer">
           {loves.map((love) => {
             return (
-              <li key={love.love_id}>
+              <div key={love.love_id} className="griditem">
                 {" "}
                 <Love
                   love={love}
@@ -88,10 +77,10 @@ const ListLoves = () => {
                   toUpdate={onUpdate}
                   // formSubmissionData={love}
                 />
-              </li>
+              </div>
             );
           })}
-        </ul>
+        </div>
       </div>
       <MyForm
         key={editingLove ? editingLove.love_id : null}
