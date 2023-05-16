@@ -8,20 +8,20 @@ Forget Me Not is the ultimate app for never forgetting important details about y
 [![GitHub repo size](https://img.shields.io/github/repo-size/sarahtech2022/ForgetMeNot)](https://github.com/sarahtech2022/ForgetMeNot/)
 [![GitHub contributors](https://img.shields.io/github/contributors/sarahtech2022/ForgetMeNot)](https://github.com/sarahtech2022/ForgetMeNot/)
 
-## Contents
+### :file_folder: Contents
 
 - [About](#about-ForgetMeNot)
 - [Tech Stack](#tech-stack)
 - [API Reference](#api-reference)
 - [Installation](#installation)
 
-## About Forget Me Not
+### :clipboard: About Forget Me Not
 
 [Back to Contents](#contents)
 
 **_Forget Me Not_** is an app for storing important details about loved ones in one convenient place. You can easily access and update information about family and friends, ensuring that no important details slip your mind.
 
-## Tech Stack
+### :diamond_shape_with_a_dot_inside: Tech Stack
 
 [Back to Contents](#contents)
 
@@ -65,7 +65,7 @@ Forget Me Not is the ultimate app for never forgetting important details about y
   </tr>
 </table>
 
-## API Reference
+### :space_invader: API Reference
 
 [Back to Contents](#contents)
 
@@ -78,7 +78,7 @@ Forget Me Not is the ultimate app for never forgetting important details about y
   </tr>
 </table>
 
-## Installation
+### :gear: Installation
 
 [Back to Contents](#contents)
 
