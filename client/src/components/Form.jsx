@@ -27,8 +27,9 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
   };
 
   const handleCheckChange = (event) => {
-    const is_family = event.target.value;
+    const is_family = event.target.checked;
     //console.log(is_family)
+
     setLove((love) => ({ ...love, is_family }));
   };
 
@@ -64,11 +65,6 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
 
   //********************** */
   const handleOnChange = (avatarOptions) => {
-    avatarOptions.hair;
-    avatarOptions.eyes;
-    avatarOptions.mouth;
-    avatarOptions.skin;
-    // const hair = event.target.value;
     setLove((love) => ({ ...love, ...avatarOptions }));
   };
 
@@ -106,28 +102,6 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
       });
   };
 
-  // //******************************************* */
-  // //A function to handle the post request for avatar
-  // const postAvatar = (newAvatar) => {
-  //   console.log("reached Post Request", newAvatar);
-  //   return fetch("/api/avatars", {
-  //     method: "POST",
-  //     headers: { "Content-Type": "application/json" },
-  //     body: JSON.stringify(newAvatar),
-  //   })
-  //     .then((response) => {
-  //       return response.json();
-  //     })
-  //     .then((data) => {
-  //       console.log("From the post ", data);
-  //       //I'm sending data to the List of Loves (the parent) for updating the list
-  //       onSaveLove(data);
-  //       //this line just for cleaning the form
-  //       clearForm();
-  //     });
-  // };
-  // //************************************** */
-
   //A function to handle the post request
   const putLove = (toEditLove) => {
     return fetch(`/api/loves/${toEditLove.love_id}`, {
@@ -159,6 +133,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
     <Form className="form-students" onSubmit={handleSubmit}>
       <Form.Group>
         <Form.Label>Love Name</Form.Label>
+
         <input
           type="text"
           id="add-love-name"
