@@ -1,7 +1,6 @@
 # Forget Me Not
 
-![LOGO, forgetmenot logo](https://i.ibb.co/9WHPN29/LOGO.jpg)
-<img src="https://i.ibb.co/9WHPN29/LOGO.jpg" width="200" height="200" alt="logoimage" />
+<img src="https://i.ibb.co/9WHPN29/LOGO.jpg" width="650" height="300" alt="logoimage" />
 
 Forget Me Not is the ultimate app for never forgetting important details about your loved ones. You can easily access and update information about family and friends, ensuring that no important details slip your mind. It's perfect for busy individuals who want to stay organized and thoughtful, and for anyone who values their relationships and wants to deepen their connections with loved ones. Use Forget Me Not today and start cherishing every moment with those who matter most.
 
@@ -72,7 +71,7 @@ Forget Me Not is the ultimate app for never forgetting important details about y
 <table align="center">
   <tr>
      <td align="center" width="96">
-        <img src="https://i.ibb.co/WtVxGRZ/DiceBear.png" width="80" height="70" alt="DiceBear" />
+        <img src="https://i.ibb.co/WtVxGRZ/DiceBear.png" width="70" height="70" alt="DiceBear" />
         <br>Dice Bear
      </td>
   </tr>
