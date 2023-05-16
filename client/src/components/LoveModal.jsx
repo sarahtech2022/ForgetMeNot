@@ -3,6 +3,7 @@ import Button from "react-bootstrap/Button";
 import Modal from "react-bootstrap/Modal";
 import * as adventurer from "@dicebear/adventurer";
 import { createAvatar } from "@dicebear/core";
+import "../App.css";
 
 function LoveModal({ loveinfo }) {
   const [show, setShow] = useState(false);
@@ -32,9 +33,11 @@ function LoveModal({ loveinfo }) {
 
   //loadcity is an asych operation and cant do it inside a component because its synchronous!!!
 
+  // variant = "primary";
+
   return (
     <>
-      <Button variant="primary" onClick={handleShow}>
+      <Button className="modalButton" onClick={handleShow}>
         Click for Love Info
       </Button>
 
