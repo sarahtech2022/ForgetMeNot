@@ -13,6 +13,7 @@ Forget Me Not is the ultimate app for never forgetting important details about y
 - [About](#about-ForgetMeNot)
 - [Tech Stack](#tech-stack)
 - [API Reference](#api-reference)
+- [Installation](#installation)
 
 ## About Forget Me Not
 
@@ -76,3 +77,53 @@ Forget Me Not is the ultimate app for never forgetting important details about y
      </td>
   </tr>
 </table>
+
+## Installation
+
+[Back to Contents](#contents)
+
+**This project uses Auth0. Please go to [Auth0](https://auth0.com/) and make an account and retrieve a domain and clientid. See .env.example for set up!**
+
+Step 1: Clone my project & switch into the project directory.
+
+```bash
+  git clone https://github.com/sarahtech2022/ForgetMeNot
+  cd ForgetMeNot
+```
+
+Step 2: Install all packages.
+
+```bash
+  cd client && npm install && cd ../server && npm install
+```
+
+Step 3: Setup Environment Variables
+
+- Copy the instructions from both .env.example files in the client and server.
+
+Step 4: Connect the database and the data.
+
+```bash
+  cd server
+  psql postgres -f db.sql
+```
+
+Step 5: Start the program!
+
+Method 1: Have two servers running at the same time.
+
+```bash
+  cd client && npm start
+  // open a new terminal
+  cd server && npm start
+```
+
+Method 2: Have just one server running.
+
+```bash
+  cd client && npm run build
+  cd server && npm run start
+```
+
+**Note:
+Client server will be running on [http://localhost:5173](http://localhost:5173) and server will be running on [http://localhost:8080](http://localhost:8080).**
