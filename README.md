@@ -71,7 +71,7 @@ Forget Me Not is the ultimate app for never forgetting important details about y
 <table align="center">
   <tr>
      <td align="center" width="96">
-        <img src="DiceBearAPI.png" width="48" height="48" alt="DiceBear" />
+        <img src="https://i.ibb.co/WtVxGRZ/DiceBear.png" width="48" height="48" alt="DiceBear" />
         <br>Dice Bear
      </td>
   </tr>
