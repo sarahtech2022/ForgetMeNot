@@ -44,7 +44,7 @@ app.post("/api/loves", async (req, res) => {
           eyes: req.body.eyes,
           mouth: req.body.mouth,
           skin: req.body.skin,
-          hair_color: req.hair_color,
+          hair_color: req.body.hairColor,
         };
         //avatar variable is inserting into the table so that vairable has the avatar_id stored in it
         const avatar = await t.one(

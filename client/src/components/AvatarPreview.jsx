@@ -27,7 +27,7 @@ const AvatarPreview = ({ onChange }) => {
       //and our event is the onchange!
       //update is which state function u want to call.
       //this will have onchange event
-      onChange({ hair, eyes, mouth, skin });
+      onChange({ hair, eyes, mouth, skin, hairColor });
     };
   };
 
