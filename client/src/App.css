@@ -11,7 +11,7 @@
 }
 
 a.navbar-brand {
-  margin-inline-start: -5em;
+  margin-inline-start: -4.5em;
 }
 
 .nav-link {
@@ -41,7 +41,6 @@ ul {
   margin-top: 3em;
   flex: 1;
 } */
-
 
 
 
@@ -178,4 +177,20 @@ box-shadow: inset 0px 0px 8px #f5e6ec;
 
 .d-lg-inline-block{
   padding-left: 40px;
+}
+
+.logout{
+  /* margin-bottom: 10px; */
+    background-color: #FFF4F4;
+    box-shadow: inset 0px 0px 8px #F072A9;
+    border-width: 1px;
+    border-style: dashed;
+    border: #F072A9;
+    color: #F072A9;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 59px;
 }

@@ -27,7 +27,9 @@ function MyNavBar(props) {
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              <button onClick={() => logout()}>Log Out</button>
+              <button className="logout" onClick={() => logout()}>
+                Log Out
+              </button>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

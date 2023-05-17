@@ -29,15 +29,15 @@ const Friends = () => {
   return (
     <div>
       <h2>My Friends </h2>
-      <ul>
+      <div className="gridcontainer">
         {friends.map((friend) => {
           return (
-            <li key={friend.love_id}>
+            <div key={friend.love_id} className="griditem">
               <Love love={friend} />{" "}
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };
