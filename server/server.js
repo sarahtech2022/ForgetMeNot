@@ -175,7 +175,7 @@ app.post("/api/loves", async (req, res) => {
 
 //------------------------------------------------------------- */
 
-// create the get request for family and avatars*** in the endpoint '/api/family'
+// create the get request for friends and avatars*** in the endpoint '/api/family'
 app.get("/api/friends", async (req, res) => {
   try {
     const friends = await db.query(
@@ -188,7 +188,18 @@ app.get("/api/friends", async (req, res) => {
   }
 });
 
-// "SELECT * FROM loves WHERE is_family=FALSE INNER JOIN avatars ON avatars.avatar_id=loves.avatar_id";
+// create the get request for family and avatars*** in the endpoint '/api/family'
+app.get("/api/family", async (req, res) => {
+  try {
+    const family = await db.query(
+      "SELECT * FROM loves INNER JOIN avatars ON avatars.avatar_id = loves.avatar_id WHERE loves.is_family = TRUE"
+    );
+    res.send(family);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).json({ e });
+  }
+});
 
 //------------------------------------------------------------- */
 
