@@ -218,4 +218,13 @@ box-shadow: inset 0px 0px 8px #f5e6ec;
     display: inline-block;
     font-size: 15px;
     border-radius: 59px;
+    margin-left: 465px;
+}
+
+.description{
+  color: #e395a8;
+  width: 850px;
+  padding-left: 275px;
+    /* padding: 29px; */
+
 }

@@ -9,6 +9,13 @@ const Login = () => {
       <div className="homepagetitle">
         <img width="400" src={Logo}></img>
       </div>
+      <p className="description">
+        {" "}
+        Never forget important details about loved ones with Forget Me Not.
+        Access and update information about family and friends, staying
+        organized and thoughtful. Cherish every moment with those who matter
+        most.
+      </p>
       <button
         textalign="center"
         className="login"
