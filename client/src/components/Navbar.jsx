@@ -21,7 +21,7 @@ function MyNavBar(props) {
             />{" "}
           </Navbar.Brand>
           <Nav.Link href="/loves">All Your Loves </Nav.Link>
-          <Nav.Link>Add A Love</Nav.Link>
+          {/* <Nav.Link>Add A Love</Nav.Link> */}
           <Nav.Link href="/family">Family</Nav.Link>
           <Nav.Link href="/friends">Friends</Nav.Link>
           <Navbar.Toggle />
