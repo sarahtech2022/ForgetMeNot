@@ -6,7 +6,7 @@ const Login = () => {
   const { loginWithRedirect } = useAuth0();
   return (
     <div>
-      <div>
+      <div className="homepagetitle">
         <img width="400" src={Logo}></img>
       </div>
       <button

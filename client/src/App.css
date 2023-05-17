@@ -200,3 +200,22 @@ box-shadow: inset 0px 0px 8px #f5e6ec;
   color: #e395a8; 
   padding-left: 20px;
 }
+
+.homepagetitle{
+  padding-left: 300px;
+}
+
+.login{
+  background-color: #FFF4F4;
+    box-shadow: inset 0px 0px 8px #F072A9;
+    border-width: 1px;
+    border-style: dashed;
+    border: #F072A9;
+    color: #F072A9;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 15px;
+    border-radius: 59px;
+}
