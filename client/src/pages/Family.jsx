@@ -28,7 +28,7 @@ const Family = () => {
 
   return (
     <div>
-      <h2>My Family </h2>
+      <h2 className="title">My Family </h2>
       <div className="gridcontainer">
         {family.map((family) => {
           return (

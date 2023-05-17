@@ -28,7 +28,7 @@ const Friends = () => {
 
   return (
     <div>
-      <h2>My Friends </h2>
+      <h2 className="title">My Friends </h2>
       <div className="gridcontainer">
         {friends.map((friend) => {
           return (
