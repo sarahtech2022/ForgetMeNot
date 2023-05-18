@@ -43,7 +43,7 @@ function LoveModal({ loveinfo }) {
 
       <Modal show={show} onHide={handleClose}>
         <Modal.Header closeButton>
-          <Modal.Title>Info about your love:</Modal.Title>
+          <Modal.Title>Info about {loveinfo.love_name}:</Modal.Title>
         </Modal.Header>
         <Modal.Body>
           <p>{loveinfo.is_family}</p>

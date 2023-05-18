@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import AvatarPreview from "../components/AvatarPreview";
 
-const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
+const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
   // This is the original State with not initial love
   const [love, setLove] = useState(
     editingLove || {
@@ -85,7 +85,13 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove }) => {
   //A function to handle the post request
   const postLove = (newLove) => {
     console.log("reached Post Request", newLove);
-    return fetch("/api/loves", {
+    let apiURL = "";
+    if (editingProfile === true) {
+      apiURL = "/api/profile";
+    } else {
+      apiURL = "/api/loves";
+    }
+    return fetch(apiURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify(newLove),

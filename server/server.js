@@ -203,6 +203,22 @@ app.get("/api/family", async (req, res) => {
 
 //------------------------------------------------------------- */
 
+// create the get request for User Profile *** in the endpoint '/api/profile'
+app.get("/api/profile", async (req, res) => {
+  try {
+    const profile = await db.query(
+      "SELECT * FROM users INNER JOIN avatars ON avatars.avatar_id = users.avatar_id WHERE user_email= $1",
+      []
+    );
+    res.send(profile);
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).json({ e });
+  }
+});
+
+//------------------------------------------
+
 // delete request for loves
 app.delete("/api/loves/:love_id", async (req, res) => {
   try {

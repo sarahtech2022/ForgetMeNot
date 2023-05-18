@@ -28,16 +28,16 @@ const Family = () => {
 
   return (
     <div>
-      <h2>My Family </h2>
-      <ul>
+      <h2 className="title">My Family </h2>
+      <div className="gridcontainer">
         {family.map((family) => {
           return (
-            <li key={family.love_id}>
+            <div key={family.love_id} className="griditem">
               <Love love={family} />{" "}
-            </li>
+            </div>
           );
         })}
-      </ul>
+      </div>
     </div>
   );
 };

@@ -20,14 +20,16 @@ function MyNavBar(props) {
               alt="React Bootstrap logo"
             />{" "}
           </Navbar.Brand>
-          <Nav.Link href="/loves">All Your Loves </Nav.Link>
+          <Nav.Link href="/profile">Your Profile</Nav.Link>
           {/* <Nav.Link>Add A Love</Nav.Link> */}
           <Nav.Link href="/family">Family</Nav.Link>
           <Nav.Link href="/friends">Friends</Nav.Link>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
-              <button onClick={() => logout()}>Log Out</button>
+              <button className="logout" onClick={() => logout()}>
+                Log Out
+              </button>
             </Navbar.Text>
           </Navbar.Collapse>
         </Container>

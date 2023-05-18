@@ -65,7 +65,7 @@ const ListLoves = () => {
   return (
     <div className="mybody">
       <div className="list-students">
-        <h2>My Loves </h2>
+        <h2 className="title">My Loves </h2>
         <div className="gridcontainer">
           {loves.map((love) => {
             return (
@@ -83,6 +83,7 @@ const ListLoves = () => {
         </div>
       </div>
       <MyForm
+        editingProfile={false}
         key={editingLove ? editingLove.love_id : null}
         onSaveLove={onSaveLove}
         editingLove={editingLove}

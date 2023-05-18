@@ -3,7 +3,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import MyNavBar from "./components/Navbar";
 
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Loves from "./pages/Loves";
+import Profile from "./pages/Profile";
 import Family from "./pages/Family";
 import Friends from "./pages/Friends";
 import Root from "./pages/Root";
@@ -14,8 +14,8 @@ const router = createBrowserRouter([
     children: [
       { index: true, element: <Home /> },
       {
-        path: "/loves",
-        element: <Loves />,
+        path: "/profile",
+        element: <Profile />,
       },
       {
         path: "/family",
