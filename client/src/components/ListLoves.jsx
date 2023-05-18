@@ -83,6 +83,7 @@ const ListLoves = () => {
         </div>
       </div>
       <MyForm
+        editingProfile={false}
         key={editingLove ? editingLove.love_id : null}
         onSaveLove={onSaveLove}
         editingLove={editingLove}
