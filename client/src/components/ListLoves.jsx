@@ -2,8 +2,10 @@ import React, { useState, useEffect } from "react";
 import * as ioicons from "react-icons/io5";
 import MyForm from "./Form";
 import Love from "./Love";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const ListLoves = () => {
+  const { user } = useAuth0();
   // this is my original state with an array of loves
   const [loves, setLoves] = useState([]);
 
@@ -14,7 +16,7 @@ const ListLoves = () => {
 
   const loadLoves = () => {
     // A function to fetch the list of loves that will be load anytime that list change
-    fetch("/api/loves")
+    fetch(`/api/loves?user_sub=${user.sub}`)
       .then((response) => response.json())
       .then((loves) => {
         setLoves(loves);
@@ -46,7 +48,7 @@ const ListLoves = () => {
   //A function to handle the Delete funtionality
   const onDelete = (love) => {
     //console.log(love, "delete method")
-    return fetch(`/api/loves/${love.love_id}`, {
+    return fetch(`/api/loves/${love.love_id}?user_sub=${user.sub}`, {
       method: "DELETE",
     }).then((response) => {
       //console.log(response);

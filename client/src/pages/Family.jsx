@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
 import Love from "../components/Love";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Family = () => {
+  const { user } = useAuth0();
   // this is my original state with an array of loves
   const [family, setFamily] = useState([]);
 
@@ -10,7 +12,7 @@ const Family = () => {
 
   const loadFamily = () => {
     // A function to fetch the list of loves that will be load anytime that list change
-    fetch("/api/family")
+    fetch(`/api/family?user_sub=${user.sub}`)
       .then((response) => response.json())
       .then((family) => {
         setFamily(family);

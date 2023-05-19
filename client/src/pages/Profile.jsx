@@ -1,12 +1,14 @@
 import MyForm from "../components/Form";
 import Love from "../components/Love";
 import React, { useState, useEffect } from "react";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const Profile = () => {
+  const { user } = useAuth0();
   const [profile, setProfile] = useState([]);
 
   const loadProfile = () => {
-    fetch("/api/profile")
+    fetch(`/api/profile?user_sub=${user.sub}`)
       .then((response) => response.json())
       .then((profile) => {
         setProfile(profile);
