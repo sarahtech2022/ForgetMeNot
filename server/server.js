@@ -21,8 +21,14 @@ app.get("/", (req, res) => {
 // create the get request for loves and avatars*** in the endpoint '/api/loves'
 app.get("/api/loves", async (req, res) => {
   try {
+    const user = await db.query("SELECT user_id FROM users where sub=$1", [
+      req.query.user_sub,
+    ]);
+    console.log(req.query.user_sub);
+    console.log(user, "this is from my server");
     const loves = await db.query(
-      "SELECT * FROM loves INNER JOIN avatars ON avatars.avatar_id=loves.avatar_id"
+      "SELECT * FROM loves INNER JOIN avatars ON avatars.avatar_id=loves.avatar_id WHERE user_id=$1",
+      [user[0].user_id]
     );
     res.send(loves);
   } catch (e) {
@@ -218,6 +224,28 @@ app.get("/api/profile", async (req, res) => {
 });
 
 //------------------------------------------
+//*****************/////////////////////////////// */
+app.post("/api/account", async (req, res) => {
+  try {
+    // const profile = await db.query("SELECT * FROM users WHERE sub= $1 ", [
+    //   req.body.sub,
+    // ]);
+    // if (profile.length > 0) {
+    //   res.json({ id: profile.user_id });
+    //   return;
+    // }
+    const newuser = await db.query(
+      "INSERT INTO users(user_email, sub) VALUES($1, $2) ON CONFLICT DO NOTHING RETURNING *",
+      [req.body.email, req.body.sub]
+    );
+    res.json({ id: newuser.user_id });
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).json({ e });
+  }
+});
+
+//*****************/////////////////////////////// */
 
 // delete request for loves
 app.delete("/api/loves/:love_id", async (req, res) => {

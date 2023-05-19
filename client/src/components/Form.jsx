@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import AvatarPreview from "../components/AvatarPreview";
+import { useAuth0 } from "@auth0/auth0-react";
 
 const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
+  const { user } = useAuth0();
   // This is the original State with not initial love
   const [love, setLove] = useState(
     editingLove || {
@@ -94,7 +96,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
     return fetch(apiURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(newLove),
+      body: JSON.stringify({ ...newLove, user_sub: user.sub }),
     })
       .then((response) => {
         return response.json();
@@ -113,7 +115,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
     return fetch(`/api/loves/${toEditLove.love_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify(toEditLove),
+      body: JSON.stringify({ ...toEditLove, user_sub: user.sub }),
     })
       .then((response) => {
         return response.json();

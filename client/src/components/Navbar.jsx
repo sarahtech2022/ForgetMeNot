@@ -3,9 +3,25 @@ import Navbar from "react-bootstrap/Navbar";
 import Nav from "react-bootstrap/Nav";
 import Logo from "../assets/LOGO2.jpeg";
 import { useAuth0 } from "@auth0/auth0-react";
+import { useEffect } from "react";
 
 function MyNavBar(props) {
-  const { logout } = useAuth0();
+  const { isAuthenticated, user, logout } = useAuth0();
+  useEffect(() => {
+    if (isAuthenticated === true) {
+      fetch("/api/account", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(user),
+      })
+        .then((response) => {
+          return response.json();
+        })
+        .then((data) => {
+          console.log("From the post ", data);
+        });
+    }
+  }, [isAuthenticated, user]);
 
   return (
     <>
