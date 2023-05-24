@@ -224,6 +224,57 @@ app.get("/api/profile", async (req, res) => {
 });
 
 //------------------------------------------
+
+// create the post request for User Profile *** in the endpoint '/api/profile'
+app.post("/api/profile", async (req, res) => {
+  try {
+    const existingProfile = await db.query(
+      "SELECT * FROM users WHERE sub= $1 ",
+      [req.body.sub]
+    );
+    const profileValues = {
+      love_name: req.body.love_name,
+      love_birthday: req.body.love_birthday,
+      love_flower: req.body.love_flower,
+      love_color: req.body.love_color,
+      love_cake: req.body.love_cake,
+    };
+    if (existingProfile.love_id === null) {
+      const updateProfile = await db.query(
+        "UPDATE loves SET love_name=$1, love_birthday=$2, love_flower=$3, love_color=$4, love_cake=$5 WHERE user_id=$6 AND love_id=$7",
+        [
+          profileValues.love_name,
+          profileValues.love_birthday,
+          profileValues.love_flower,
+          profileValues.love_color,
+          profileValues.love_cake,
+          existingProfile.user_id,
+          existingProfile.love_id,
+        ]
+      );
+    } else {
+      const profile = await db.query(
+        "INSERT INTO loves(love_name, love_birthday, love_flower, love_color, love_cake) VALUES($1, $2, $3, $4, $5) RETURNING *",
+        [
+          profileValues.love_name,
+          profileValues.love_birthday,
+          profileValues.love_flower,
+          profileValues.love_color,
+          profileValues.love_cake,
+        ]
+      );
+
+      const other = await db.query(
+        "UPDATE users SET love_id=$1 WHERE user_id=$2",
+        [profile.love_id, existingProfile.user_id]
+      );
+    }
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).json({ e });
+  }
+});
+
 //*****************/////////////////////////////// */
 app.post("/api/account", async (req, res) => {
   try {

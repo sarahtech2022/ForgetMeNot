@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import AvatarPreview from "../components/AvatarPreview";
+import AvatarPreview from "./AvatarPreview";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {

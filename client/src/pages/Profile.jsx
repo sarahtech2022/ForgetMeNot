@@ -1,4 +1,4 @@
-import MyForm from "../components/Form";
+import MyForm from "../components/MyForm";
 import Love from "../components/Love";
 import React, { useState, useEffect } from "react";
 import { useAuth0 } from "@auth0/auth0-react";
