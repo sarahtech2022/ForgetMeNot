@@ -152,25 +152,29 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
         />
       </Form.Group>
 
-      <Form.Check
-        type={"checkbox"}
-        id={`add-is_family`}
-        checked={love.is_family}
-        onChange={handleCheckChange}
-        label={`Are they family?`}
-      />
-
-      <Form.Group>
-        <Form.Label>Year Met</Form.Label>
-        <input
-          type="text"
-          id="add-love-met"
-          placeholder="Met"
-          required
-          value={love.love_met}
-          onChange={handleMetChange}
+      {editingProfile === false ? (
+        <Form.Check
+          type={"checkbox"}
+          id={`add-is_family`}
+          checked={love.is_family}
+          onChange={handleCheckChange}
+          label={`Are they family?`}
         />
-      </Form.Group>
+      ) : null}
+
+      {editingProfile === false ? (
+        <Form.Group>
+          <Form.Label>Year Met</Form.Label>
+          <input
+            type="text"
+            id="add-love-met"
+            placeholder="Met"
+            required
+            value={love.love_met}
+            onChange={handleMetChange}
+          />
+        </Form.Group>
+      ) : null}
 
       <Form.Group>
         <Form.Label>Birthday</Form.Label>
