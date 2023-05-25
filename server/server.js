@@ -101,84 +101,6 @@ app.post("/api/loves", async (req, res) => {
 
 /////////////////
 
-//********** */
-// `insert into games(post_id, game_name, title, console, rating, recommendation, username, post, image_url) values(nextval('id_seq'), $1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-
-// create the POST request for love details in loves table
-// app.post("/api/loves", async (req, res) => {
-//   console.log(req.body);
-//   try {
-//     const newLove = {
-//       love_name: req.body.love_name,
-//       is_family: req.body.is_family,
-//       love_met: req.body.love_met,
-//       love_birthday: req.body.love_birthday,
-//       love_flower: req.body.love_flower,
-//       love_color: req.body.love_color,
-//       love_cake: req.body.love_cake,
-//     };
-//     //console.log([newLove.love_name, newLove.is_family, newLove.love_met]);
-//     const result = await db.query(
-//       "INSERT INTO loves(love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-//       [
-//         newLove.love_name,
-//         newLove.is_family,
-//         newLove.love_met,
-//         newLove.love_birthday,
-//         newLove.love_flower,
-//         newLove.love_color,
-//         newLove.love_cake,
-//       ]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-//   } catch (e) {
-//     console.log(e);
-//     return res.status(400).json({ e });
-//   }
-// });
-
-//**************** */
-
-// // create the get request for avatars in the endpoint '/api/avatars'
-// app.get("/api/avatars", async (req, res) => {
-//   try {
-//     const { rows: avatars } = await db.query("SELECT * FROM avatars");
-//     res.send(avatars);
-//   } catch (e) {
-//     return res.status(400).json({ e });
-//   }
-// });
-
-// //**************** */
-
-//********************************************************************** */
-
-// create the POST request for avatar details in avatar table
-// app.post("/api/avatars", async (req, res) => {
-//   console.log(req.body);
-//   try {
-//     const newAvatar = {
-//       hair: req.body.hair,
-//       eyes: req.body.eyes,
-//       mouth: req.body.mouth,
-//       skin: req.body.skin,
-//     };
-//     //console.log([newAvatar.hair,newAvatar.eyes, newAvatar.mouth, newAvatar.skin]);
-//     const result = await db.query(
-//       "INSERT INTO avatars(hair, eyes, mouth, skin) VALUES($1, $2, $3, $4) RETURNING *",
-//       [newAvatar.hair, newAvatar.eyes, newAvatar.mouth, newAvatar.skin]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-//   } catch (e) {
-//     console.log(e);
-//     return res.status(400).json({ e });
-//   }
-// });
-
-//********************************************************************** */
-
 //------------------------------------------------------------- */
 
 // create the get request for friends and avatars*** in the endpoint '/api/family'
@@ -228,18 +150,25 @@ app.get("/api/profile", async (req, res) => {
 // create the post request for User Profile *** in the endpoint '/api/profile'
 app.post("/api/profile", async (req, res) => {
   try {
-    const existingProfile = await db.query(
+    const [existingProfile] = await db.query(
       "SELECT * FROM users WHERE sub= $1 ",
       [req.body.sub]
     );
+
     const profileValues = {
       love_name: req.body.love_name,
       love_birthday: req.body.love_birthday,
       love_flower: req.body.love_flower,
       love_color: req.body.love_color,
       love_cake: req.body.love_cake,
+      hair: req.body.hair,
+      eyes: req.body.eyes,
+      mouth: req.body.mouth,
+      skin: req.body.skin,
+      hair_color: req.body.hair_color,
     };
-    if (existingProfile.love_id === null) {
+
+    if (existingProfile.love_id !== null) {
       const updateProfile = await db.query(
         "UPDATE loves SET love_name=$1, love_birthday=$2, love_flower=$3, love_color=$4, love_cake=$5 WHERE user_id=$6 AND love_id=$7",
         [
@@ -253,14 +182,27 @@ app.post("/api/profile", async (req, res) => {
         ]
       );
     } else {
-      const profile = await db.query(
-        "INSERT INTO loves(love_name, love_birthday, love_flower, love_color, love_cake) VALUES($1, $2, $3, $4, $5) RETURNING *",
+      const [avatar] = await db.query(
+        "INSERT INTO avatars(hair, eyes, mouth, skin, hair_color) VALUES($1, $2, $3, $4, $5) RETURNING *",
+        [
+          profileValues.hair,
+          profileValues.eyes,
+          profileValues.mouth,
+          profileValues.skin,
+          profileValues.hair_color,
+        ]
+      );
+
+      const [profile] = await db.query(
+        "INSERT INTO loves(love_name, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
         [
           profileValues.love_name,
           profileValues.love_birthday,
           profileValues.love_flower,
           profileValues.love_color,
           profileValues.love_cake,
+          existingProfile.user_id,
+          avatar.avatar_id,
         ]
       );
 
@@ -269,6 +211,7 @@ app.post("/api/profile", async (req, res) => {
         [profile.love_id, existingProfile.user_id]
       );
     }
+    res.json({ sucess: true });
   } catch (e) {
     console.log(e.message);
     return res.status(400).json({ e });

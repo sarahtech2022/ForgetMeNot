@@ -96,7 +96,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
     return fetch(apiURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...newLove, user_sub: user.sub }),
+      body: JSON.stringify({ ...newLove, sub: user.sub }),
     })
       .then((response) => {
         return response.json();
@@ -115,7 +115,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
     return fetch(`/api/loves/${toEditLove.love_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...toEditLove, user_sub: user.sub }),
+      body: JSON.stringify({ ...toEditLove, sub: user.sub }),
     })
       .then((response) => {
         return response.json();
