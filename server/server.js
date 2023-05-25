@@ -151,7 +151,7 @@ app.get("/api/profile", async (req, res) => {
 app.post("/api/profile", async (req, res) => {
   try {
     const [existingProfile] = await db.query(
-      "SELECT * FROM users WHERE sub= $1 ",
+      "SELECT users.*, loves.avatar_id FROM users LEFT JOIN loves ON users.love_id = loves.love_id WHERE sub= $1 ",
       [req.body.sub]
     );
 
@@ -165,9 +165,10 @@ app.post("/api/profile", async (req, res) => {
       eyes: req.body.eyes,
       mouth: req.body.mouth,
       skin: req.body.skin,
-      hair_color: req.body.hair_color,
+      hair_color: req.body.hairColor,
     };
 
+    console.log(existingProfile, "existing profile");
     if (existingProfile.love_id !== null) {
       const updateProfile = await db.query(
         "UPDATE loves SET love_name=$1, love_birthday=$2, love_flower=$3, love_color=$4, love_cake=$5 WHERE user_id=$6 AND love_id=$7",
@@ -179,6 +180,17 @@ app.post("/api/profile", async (req, res) => {
           profileValues.love_cake,
           existingProfile.user_id,
           existingProfile.love_id,
+        ]
+      );
+      const updateAvatar = await db.query(
+        "UPDATE avatars SET hair=$1, eyes=$2, mouth=$3, skin=$4, hair_color=$5 WHERE avatar_id=$6",
+        [
+          profileValues.hair,
+          profileValues.eyes,
+          profileValues.mouth,
+          profileValues.skin,
+          profileValues.hair_color,
+          existingProfile.avatar_id,
         ]
       );
     } else {
