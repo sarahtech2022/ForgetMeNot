@@ -154,25 +154,29 @@ INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVER
 INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (30, 'short14', 'variant01', 'variant01', 'BF9169', '8C644D');
 INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (31, 'short14', 'variant01', 'variant01', 'BF9169', '8C644D');
 INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (34, 'long17', 'variant01', 'variant01', '593123', '8C644D');
-INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (33, 'short14', 'variant01', 'variant01', 'FFE0BD', '8C644D');
 INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (35, 'short10', 'variant01', 'variant27', 'BF9169', '8C644D');
+INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (33, 'long09', 'variant23', 'variant06', 'FFE0BD', 'ac6511');
+INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (36, 'long07', 'variant01', 'variant27', 'BF9169', '0e0e0e');
+INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (37, 'long06', 'variant05', 'variant05', '763900', '0e0e0e');
+INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (38, 'long05', 'variant05', 'variant05', 'FFE0BD', 'dba3be');
+INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (46, 'short01', 'variant01', 'variant01', '9e5622', '8C644D');
+INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (39, 'long17', 'variant22', 'variant26', 'D7B6A5', 'cb6820');
 
 
 --
 -- Data for Name: loves; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (48, 'Testtttt', false, 'jn', '2023-06-06', 'kjbnk', 'kjnkbn', 'knjkn', NULL, 34);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (47, 'Gisselle', NULL, NULL, '2023-05-02', 'lknlsd', 'dlksndls', 'sdlknds', 20, 33);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (49, 'knjsfkbas', false, 'adjnad', '2023-05-01', 'kjnaknd', 'kjnfsfs', ',njskffs', NULL, 35);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (37, 'TEST1277777', true, '2022', '2023-05-01', 'sdds', 'dsdd', 'dsds', 20, 29);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (47, 'Sarah', NULL, NULL, '2023-05-31', 'Peonies', 'Pink', 'Red Velvet', 20, 33);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (50, 'Roshanell', false, '2023', '2023-05-24', 'Will update', 'Will update', 'Will update', 20, 36);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (52, 'Dana', false, '2023', '2023-05-30', 'Will update', 'Will update', 'Will update', 20, 38);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (51, 'Pandora', false, '2023', '2023-05-01', 'Will update', 'Will update', 'Will update', 20, 37);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (53, 'Test9999', true, 'sddss', '2023-05-09', 'fsfs', 'sffddf', 'fdfddf', 20, 39);
 INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (5, 'Ruby', false, '2023', '2023-05-03', 'rose', 'blue', 'vanilla', 20, 4);
 INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (24, 'Sarah', false, '20202', '2023-05-17', 'Rose', 'ssd', 'sds', 20, 12);
 INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (25, 'Sabry', false, '2023', '2023-06-22', 'N/A', 'blue', 'tres leches ', 20, 13);
 INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (28, 'Vladmir', false, '2023', '2023-05-10', 'unknown', 'blue?', 'not sure', 20, 16);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (29, 'TEST', true, 'sdssd', '2023-05-31', 'sdfs', 'ffssf', 'sfsf', 20, 20);
 INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (30, 'Gisselle', false, '2022', '2023-05-16', 'Tulips', 'Purple', 'Carrot', 20, 21);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (32, 'TEST', false, 'sd', '2023-05-17', 'j', 'ssd', 'sds', 20, 24);
 
 
 --
@@ -182,27 +186,28 @@ INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday
 INSERT INTO public.users (user_id, user_email, sub, love_id) OVERRIDING SYSTEM VALUE VALUES (1, 'sar_berry@hotmail.com', 'sarah', NULL);
 INSERT INTO public.users (user_id, user_email, sub, love_id) OVERRIDING SYSTEM VALUE VALUES (6, 'sbensreiti@gmail.com', 'google-oauth2|100107406892125590468', NULL);
 INSERT INTO public.users (user_id, user_email, sub, love_id) OVERRIDING SYSTEM VALUE VALUES (20, 'bensreit@gmail.com', 'google-oauth2|117047406597175063210', 47);
+INSERT INTO public.users (user_id, user_email, sub, love_id) OVERRIDING SYSTEM VALUE VALUES (216, 'testuser123@gmail.com', 'auth0|64712c8cd8bc29fc1497855e', NULL);
 
 
 --
 -- Name: avatars_avatar_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.avatars_avatar_id_seq', 35, true);
+SELECT pg_catalog.setval('public.avatars_avatar_id_seq', 46, true);
 
 
 --
 -- Name: students_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.students_id_seq', 49, true);
+SELECT pg_catalog.setval('public.students_id_seq', 54, true);
 
 
 --
 -- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 159, true);
+SELECT pg_catalog.setval('public.users_user_id_seq', 250, true);
 
 
 --
