@@ -111,7 +111,9 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
   };
 
   //A function to handle the post request
+
   const putLove = (toEditLove) => {
+    console.log(toEditLove, "toEditLove");
     return fetch(`/api/loves/${toEditLove.love_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },

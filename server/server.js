@@ -273,8 +273,6 @@ app.delete("/api/loves/:love_id", async (req, res) => {
 
 //A put request - Update a love
 app.put("/api/loves/:love_id", async (req, res) => {
-  //console.log(req.params);
-  //This will be the id that I want to find in the DB - the love to be updated
   const love_id = req.params.love_id;
   const updatedLove = {
     love_id: req.body.love_id,
@@ -285,30 +283,50 @@ app.put("/api/loves/:love_id", async (req, res) => {
     love_flower: req.body.love_flower,
     love_color: req.body.love_color,
     love_cake: req.body.love_cake,
-    user_id: req.body.user_id, //do I need this????????????****
+    user_id: req.body.user_id,
   };
-  console.log("In the server from the url - the loves id", love_id);
-  console.log(
-    "In the server, from the react - the love to be edited",
-    updatedLove
-  );
-  // UPDATE loves SET lastname = "something" WHERE id="16";
-  const query = `UPDATE loves SET love_name=$1, is_family=$2, love_met=$3, love_birthday=$4, love_flower=$5, love_color=$6, love_cake=$7 WHERE love_id=${love_id} RETURNING *`;
-  const values = [
-    updatedLove.love_name,
-    updatedLove.is_family,
-    updatedLove.love_met,
-    updatedLove.love_birthday,
-    updatedLove.love_flower,
-    updatedLove.love_color,
-    updatedLove.love_cake,
-  ];
+
+  const updatedAvatar = {
+    hair: req.body.hair,
+    eyes: req.body.eyes,
+    mouth: req.body.mouth,
+    skin: req.body.skin,
+    hairColor: req.body.hairColor,
+  };
+
   try {
-    const updated = await db.query(query, values);
-    console.log(updated[0]);
+    const [love] = await db.query("SELECT * FROM loves WHERE love_id = $1", [
+      love_id,
+    ]);
+
+    await db.query(
+      "UPDATE avatars SET hair=$1, eyes=$2, mouth=$3, skin=$4, hair_color=$5 WHERE avatar_id = $6",
+      [
+        updatedAvatar.hair,
+        updatedAvatar.eyes,
+        updatedAvatar.mouth,
+        updatedAvatar.skin,
+        updatedAvatar.hairColor,
+        love.avatar_id,
+      ]
+    );
+
+    const updated = await db.query(
+      "UPDATE loves SET love_name=$1, is_family=$2, love_met=$3, love_birthday=$4, love_flower=$5, love_color=$6, love_cake=$7 WHERE love_id=$8 RETURNING *",
+      [
+        updatedLove.love_name,
+        updatedLove.is_family,
+        updatedLove.love_met,
+        updatedLove.love_birthday,
+        updatedLove.love_flower,
+        updatedLove.love_color,
+        updatedLove.love_cake,
+        love_id,
+      ]
+    );
     res.send(updated[0]);
   } catch (e) {
-    console.log(e);
+    console.log(e.message);
     return res.status(400).json({ e });
   }
 });

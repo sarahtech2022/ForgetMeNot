@@ -7,7 +7,7 @@ import { useAuth0 } from "@auth0/auth0-react";
 const ListLoves = () => {
   const { user } = useAuth0();
   // this is my original state with an array of loves
-  const [loves, setLoves] = useState([]);
+  const [loves, setLoves] = useState(null);
 
   //This is the state that will store all the avatar final details.
 
@@ -69,19 +69,21 @@ const ListLoves = () => {
       <div className="list-students">
         <h2 className="title">My Loves </h2>
         <div className="gridcontainer">
-          {loves.map((love) => {
-            return (
-              <div key={love.love_id} className="griditem">
-                {" "}
-                <Love
-                  love={love}
-                  toDelete={onDelete}
-                  toUpdate={onUpdate}
-                  // formSubmissionData={love}
-                />
-              </div>
-            );
-          })}
+          {loves
+            ? loves.map((love) => {
+                return (
+                  <div key={love.love_id} className="griditem">
+                    {" "}
+                    <Love
+                      love={love}
+                      toDelete={onDelete}
+                      toUpdate={onUpdate}
+                      // formSubmissionData={love}
+                    />
+                  </div>
+                );
+              })
+            : null}
         </div>
       </div>
       <MyForm
