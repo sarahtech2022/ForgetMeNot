@@ -2,6 +2,7 @@ import React from "react";
 import * as adventurer from "@dicebear/adventurer";
 import { createAvatar } from "@dicebear/core";
 import { useState } from "react";
+import { useEffect } from "react";
 
 {
   /* //onchange, several states (could do it as a single state too)
@@ -19,6 +20,10 @@ const AvatarPreview = ({ onChange }) => {
 
   const [hairColor, setHairColor] = useState("8C644D");
 
+  useEffect(() => {
+    onChange({ hair, eyes, mouth, skin, hairColor });
+  }, [hair, eyes, mouth, skin, hairColor]);
+
   const updateAvatarPreview = (update) => {
     return (event) => {
       update(event.currentTarget.value); //update coming in as argument from line 20
@@ -27,7 +32,6 @@ const AvatarPreview = ({ onChange }) => {
       //and our event is the onchange!
       //update is which state function u want to call.
       //this will have onchange event
-      onChange({ hair, eyes, mouth, skin, hairColor });
     };
   };
 

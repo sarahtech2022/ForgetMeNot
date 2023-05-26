@@ -12,21 +12,24 @@ const Profile = () => {
       .then((response) => response.json())
       .then((profile) => {
         setProfile(profile);
-        console.log(profile);
       })
       .catch((error) => {
         console.log(error);
       });
   };
 
-  console.log(profile);
   useEffect(() => {
     loadProfile();
   }, []);
   return (
     <div>
-      {" "}
-      <MyForm editingProfile={true} /> <Love love={profile} />{" "}
+      <h2 className="title">My Profile </h2>{" "}
+      <div className="gridcontainer">
+        <MyForm editingProfile={true} editingLove={profile} />{" "}
+        <div className="griditem">
+          <Love love={profile} />{" "}
+        </div>
+      </div>
     </div>
   );
 };

@@ -19,8 +19,8 @@ test("Navbar", () => {
     user: { nickname: "JohnDoe", given_name: "John" },
   });
   render(<Navbar />);
-  const projectName = screen.getByText("ForgetMeNot");
-  expect(projectName).toBeDefined();
+  const firstTab = screen.getByText("Your Profile");
+  expect(firstTab).toBeDefined();
 });
 
 test("Check to see if Dashboard link rendering", () => {

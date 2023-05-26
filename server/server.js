@@ -27,7 +27,7 @@ app.get("/api/loves", async (req, res) => {
     console.log(req.query.user_sub);
     console.log(user, "this is from my server");
     const loves = await db.query(
-      "SELECT * FROM loves INNER JOIN avatars ON avatars.avatar_id=loves.avatar_id WHERE user_id=$1",
+      "SELECT * FROM loves INNER JOIN avatars ON avatars.avatar_id=loves.avatar_id WHERE user_id=$1 AND love_met IS NOT NULL",
       [user[0].user_id]
     );
     res.send(loves);
@@ -134,9 +134,9 @@ app.get("/api/family", async (req, res) => {
 // create the get request for User Profile *** in the endpoint '/api/profile'
 app.get("/api/profile", async (req, res) => {
   try {
-    const profile = await db.query(
-      "SELECT * FROM users INNER JOIN avatars ON avatars.avatar_id = users.avatar_id WHERE user_email= $1",
-      []
+    const [profile] = await db.query(
+      "SELECT * FROM users LEFT JOIN loves ON users.love_id = loves.love_id LEFT JOIN avatars ON avatars.avatar_id= loves.avatar_id WHERE sub= $1",
+      [req.query.user_sub]
     );
     res.send(profile);
   } catch (e) {
@@ -288,7 +288,7 @@ app.put("/api/loves/:love_id", async (req, res) => {
     updatedLove
   );
   // UPDATE loves SET lastname = "something" WHERE id="16";
-  const query = `UPDATE loves SET love_name=$1, is_family=$2, love_met=$3, love_birthday=$4, love_flower=$5, love_color=$6, love_cake=$7 WHERE id=${love_id} RETURNING *`;
+  const query = `UPDATE loves SET love_name=$1, is_family=$2, love_met=$3, love_birthday=$4, love_flower=$5, love_color=$6, love_cake=$7 WHERE love_id=${love_id} RETURNING *`;
   const values = [
     updatedLove.love_name,
     updatedLove.is_family,
