@@ -16,12 +16,24 @@ SET xmloption = content;
 SET client_min_messages = warning;
 SET row_security = off;
 
+ALTER TABLE ONLY public.users DROP CONSTRAINT users_love_id_fkey;
+ALTER TABLE ONLY public.loves DROP CONSTRAINT loves_user_id_fkey;
+ALTER TABLE ONLY public.loves DROP CONSTRAINT loves_avatar_id_fkey;
+ALTER TABLE ONLY public.users DROP CONSTRAINT users_sub_key;
+ALTER TABLE ONLY public.users DROP CONSTRAINT users_pkey;
+ALTER TABLE ONLY public.loves DROP CONSTRAINT students_pkey;
+ALTER TABLE ONLY public.avatars DROP CONSTRAINT avatars_pkey;
+ALTER TABLE public.loves ALTER COLUMN love_id DROP DEFAULT;
+DROP TABLE public.users;
+DROP SEQUENCE public.students_id_seq;
+DROP TABLE public.loves;
+DROP TABLE public.avatars;
 SET default_tablespace = '';
 
 SET default_table_access_method = heap;
 
 --
--- Name: avatars; Type: TABLE; Schema: public; Owner: tpl522_11
+-- Name: avatars; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.avatars (
@@ -34,10 +46,8 @@ CREATE TABLE public.avatars (
 );
 
 
-ALTER TABLE public.avatars OWNER TO tpl522_11;
-
 --
--- Name: avatars_avatar_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl522_11
+-- Name: avatars_avatar_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 ALTER TABLE public.avatars ALTER COLUMN avatar_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -51,14 +61,14 @@ ALTER TABLE public.avatars ALTER COLUMN avatar_id ADD GENERATED ALWAYS AS IDENTI
 
 
 --
--- Name: loves; Type: TABLE; Schema: public; Owner: tpl522_11
+-- Name: loves; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.loves (
     love_id integer NOT NULL,
     love_name character varying(255) NOT NULL,
-    is_family boolean NOT NULL,
-    love_met text NOT NULL,
+    is_family boolean,
+    love_met text,
     love_birthday date NOT NULL,
     love_flower text NOT NULL,
     love_color text NOT NULL,
@@ -68,10 +78,8 @@ CREATE TABLE public.loves (
 );
 
 
-ALTER TABLE public.loves OWNER TO tpl522_11;
-
 --
--- Name: students_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl522_11
+-- Name: students_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 CREATE SEQUENCE public.students_id_seq
@@ -83,31 +91,27 @@ CREATE SEQUENCE public.students_id_seq
     CACHE 1;
 
 
-ALTER TABLE public.students_id_seq OWNER TO tpl522_11;
-
 --
--- Name: students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: tpl522_11
+-- Name: students_id_seq; Type: SEQUENCE OWNED BY; Schema: public; Owner: -
 --
 
 ALTER SEQUENCE public.students_id_seq OWNED BY public.loves.love_id;
 
 
 --
--- Name: users; Type: TABLE; Schema: public; Owner: tpl522_11
+-- Name: users; Type: TABLE; Schema: public; Owner: -
 --
 
 CREATE TABLE public.users (
     user_id integer NOT NULL,
-    user_name text NOT NULL,
     user_email text NOT NULL,
-    avatar_id integer
+    sub text NOT NULL,
+    love_id integer
 );
 
 
-ALTER TABLE public.users OWNER TO tpl522_11;
-
 --
--- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: tpl522_11
+-- Name: users_user_id_seq; Type: SEQUENCE; Schema: public; Owner: -
 --
 
 ALTER TABLE public.users ALTER COLUMN user_id ADD GENERATED ALWAYS AS IDENTITY (
@@ -121,14 +125,14 @@ ALTER TABLE public.users ALTER COLUMN user_id ADD GENERATED ALWAYS AS IDENTITY (
 
 
 --
--- Name: loves love_id; Type: DEFAULT; Schema: public; Owner: tpl522_11
+-- Name: loves love_id; Type: DEFAULT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.loves ALTER COLUMN love_id SET DEFAULT nextval('public.students_id_seq'::regclass);
 
 
 --
--- Data for Name: avatars; Type: TABLE DATA; Schema: public; Owner: tpl522_11
+-- Data for Name: avatars; Type: TABLE DATA; Schema: public; Owner: -
 --
 
 INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (12, 'long09', 'variant23', 'variant06', 'FFE0BD', 'ac6511');
@@ -149,54 +153,60 @@ INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVER
 INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (29, 'long25', 'variant21', 'variant01', 'BF9169', 'cb6820');
 INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (30, 'short14', 'variant01', 'variant01', 'BF9169', '8C644D');
 INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (31, 'short14', 'variant01', 'variant01', 'BF9169', '8C644D');
+INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (34, 'long17', 'variant01', 'variant01', '593123', '8C644D');
+INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (33, 'short14', 'variant01', 'variant01', 'FFE0BD', '8C644D');
+INSERT INTO public.avatars (avatar_id, hair, eyes, mouth, skin, hair_color) OVERRIDING SYSTEM VALUE VALUES (35, 'short10', 'variant01', 'variant27', 'BF9169', '8C644D');
 
 
 --
--- Data for Name: loves; Type: TABLE DATA; Schema: public; Owner: tpl522_11
+-- Data for Name: loves; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (5, 'Ruby', false, '2023', '2023-05-03', 'rose', 'blue', 'vanilla', 1, 4);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (24, 'Sarah', false, '20202', '2023-05-17', 'Rose', 'ssd', 'sds', NULL, 12);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (25, 'Sabry', false, '2023', '2023-06-22', 'N/A', 'blue', 'tres leches ', NULL, 13);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (28, 'Vladmir', false, '2023', '2023-05-10', 'unknown', 'blue?', 'not sure', NULL, 16);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (29, 'TEST', true, 'sdssd', '2023-05-31', 'sdfs', 'ffssf', 'sfsf', NULL, 20);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (30, 'Gisselle', false, '2022', '2023-05-16', 'Tulips', 'Purple', 'Carrot', NULL, 21);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (32, 'TEST', false, 'sd', '2023-05-17', 'j', 'ssd', 'sds', NULL, 24);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (37, 'TEST123', true, '2022', '2023-05-03', 'sdds', 'dsdd', 'dsds', NULL, 29);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (38, 'User', false, 'sfdsfs', '2023-05-24', 'ssds', 'kjb', 'carrot', NULL, 30);
-INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (39, 'User', false, 'sfdsfs', '2023-05-24', 'ssds', 'kjb', 'carrot', NULL, 31);
-
-
---
--- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: tpl522_11
---
-
-INSERT INTO public.users (user_id, user_name, user_email, avatar_id) OVERRIDING SYSTEM VALUE VALUES (1, 'Sarah ', 'sar_berry@hotmail.com', NULL);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (48, 'Testtttt', false, 'jn', '2023-06-06', 'kjbnk', 'kjnkbn', 'knjkn', NULL, 34);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (47, 'Gisselle', NULL, NULL, '2023-05-02', 'lknlsd', 'dlksndls', 'sdlknds', 20, 33);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (49, 'knjsfkbas', false, 'adjnad', '2023-05-01', 'kjnaknd', 'kjnfsfs', ',njskffs', NULL, 35);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (37, 'TEST1277777', true, '2022', '2023-05-01', 'sdds', 'dsdd', 'dsds', 20, 29);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (5, 'Ruby', false, '2023', '2023-05-03', 'rose', 'blue', 'vanilla', 20, 4);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (24, 'Sarah', false, '20202', '2023-05-17', 'Rose', 'ssd', 'sds', 20, 12);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (25, 'Sabry', false, '2023', '2023-06-22', 'N/A', 'blue', 'tres leches ', 20, 13);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (28, 'Vladmir', false, '2023', '2023-05-10', 'unknown', 'blue?', 'not sure', 20, 16);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (29, 'TEST', true, 'sdssd', '2023-05-31', 'sdfs', 'ffssf', 'sfsf', 20, 20);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (30, 'Gisselle', false, '2022', '2023-05-16', 'Tulips', 'Purple', 'Carrot', 20, 21);
+INSERT INTO public.loves (love_id, love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES (32, 'TEST', false, 'sd', '2023-05-17', 'j', 'ssd', 'sds', 20, 24);
 
 
 --
--- Name: avatars_avatar_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl522_11
+-- Data for Name: users; Type: TABLE DATA; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.avatars_avatar_id_seq', 31, true);
-
-
---
--- Name: students_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl522_11
---
-
-SELECT pg_catalog.setval('public.students_id_seq', 39, true);
+INSERT INTO public.users (user_id, user_email, sub, love_id) OVERRIDING SYSTEM VALUE VALUES (1, 'sar_berry@hotmail.com', 'sarah', NULL);
+INSERT INTO public.users (user_id, user_email, sub, love_id) OVERRIDING SYSTEM VALUE VALUES (6, 'sbensreiti@gmail.com', 'google-oauth2|100107406892125590468', NULL);
+INSERT INTO public.users (user_id, user_email, sub, love_id) OVERRIDING SYSTEM VALUE VALUES (20, 'bensreit@gmail.com', 'google-oauth2|117047406597175063210', 47);
 
 
 --
--- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: tpl522_11
+-- Name: avatars_avatar_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
 --
 
-SELECT pg_catalog.setval('public.users_user_id_seq', 1, true);
+SELECT pg_catalog.setval('public.avatars_avatar_id_seq', 35, true);
 
 
 --
--- Name: avatars avatars_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl522_11
+-- Name: students_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.students_id_seq', 49, true);
+
+
+--
+-- Name: users_user_id_seq; Type: SEQUENCE SET; Schema: public; Owner: -
+--
+
+SELECT pg_catalog.setval('public.users_user_id_seq', 159, true);
+
+
+--
+-- Name: avatars avatars_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.avatars
@@ -204,7 +214,7 @@ ALTER TABLE ONLY public.avatars
 
 
 --
--- Name: loves students_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl522_11
+-- Name: loves students_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.loves
@@ -212,7 +222,7 @@ ALTER TABLE ONLY public.loves
 
 
 --
--- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: tpl522_11
+-- Name: users users_pkey; Type: CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
@@ -220,7 +230,15 @@ ALTER TABLE ONLY public.users
 
 
 --
--- Name: loves loves_avatar_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: tpl522_11
+-- Name: users users_sub_key; Type: CONSTRAINT; Schema: public; Owner: -
+--
+
+ALTER TABLE ONLY public.users
+    ADD CONSTRAINT users_sub_key UNIQUE (sub);
+
+
+--
+-- Name: loves loves_avatar_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.loves
@@ -228,7 +246,7 @@ ALTER TABLE ONLY public.loves
 
 
 --
--- Name: loves loves_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: tpl522_11
+-- Name: loves loves_user_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.loves
@@ -236,11 +254,11 @@ ALTER TABLE ONLY public.loves
 
 
 --
--- Name: users users_avatar_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: tpl522_11
+-- Name: users users_love_id_fkey; Type: FK CONSTRAINT; Schema: public; Owner: -
 --
 
 ALTER TABLE ONLY public.users
-    ADD CONSTRAINT users_avatar_id_fkey FOREIGN KEY (avatar_id) REFERENCES public.avatars(avatar_id);
+    ADD CONSTRAINT users_love_id_fkey FOREIGN KEY (love_id) REFERENCES public.loves(love_id);
 
 
 --

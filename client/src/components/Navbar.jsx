@@ -4,6 +4,7 @@ import Nav from "react-bootstrap/Nav";
 import Logo from "../assets/LOGO2.jpeg";
 import { useAuth0 } from "@auth0/auth0-react";
 import { useEffect } from "react";
+import { Link } from "react-router-dom";
 
 function MyNavBar(props) {
   const { isAuthenticated, user, logout } = useAuth0();
@@ -36,10 +37,16 @@ function MyNavBar(props) {
               alt="React Bootstrap logo"
             />{" "}
           </Navbar.Brand>
-          <Nav.Link href="/profile">Your Profile</Nav.Link>
+          <Link className="nav-link" href="/profile">
+            Your Profile
+          </Link>
           {/* <Nav.Link>Add A Love</Nav.Link> */}
-          <Nav.Link href="/family">Family</Nav.Link>
-          <Nav.Link href="/friends">Friends</Nav.Link>
+          <Link className="nav-link" href="/family">
+            Family
+          </Link>
+          <Link className="nav-link" href="/friends">
+            Friends
+          </Link>
           <Navbar.Toggle />
           <Navbar.Collapse className="justify-content-end">
             <Navbar.Text>
