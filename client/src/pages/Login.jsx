@@ -16,13 +16,11 @@ const Login = () => {
         organized and thoughtful. Cherish every moment with those who matter
         most.
       </p>
-      <button
-        textalign="center"
-        className="login"
-        onClick={() => loginWithRedirect()}
-      >
-        Log In
-      </button>
+      <div className="text-center">
+        <button className="login" onClick={() => loginWithRedirect()}>
+          Log In
+        </button>
+      </div>
     </div>
   );
 };
