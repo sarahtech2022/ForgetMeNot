@@ -73,8 +73,12 @@ app.post("/api/loves", async (req, res) => {
           love_cake: req.body.love_cake,
         };
 
+        const user = await t.one("SELECT * FROM users WHERE sub= $1", [
+          req.body.sub,
+        ]);
+
         const love = await t.one(
-          "INSERT INTO loves(love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, avatar_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8) RETURNING *",
+          "INSERT INTO loves(love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake, avatar_id, user_id) VALUES($1, $2, $3, $4, $5, $6, $7, $8, $9) RETURNING *",
           [
             newLove.love_name,
             newLove.is_family,
@@ -84,6 +88,7 @@ app.post("/api/loves", async (req, res) => {
             newLove.love_color,
             newLove.love_cake,
             avatar.avatar_id,
+            user.user_id,
           ]
         );
         return { avatar, love };

@@ -37,14 +37,14 @@ function MyNavBar(props) {
               alt="React Bootstrap logo"
             />{" "}
           </Navbar.Brand>
-          <Link className="nav-link" href="/profile">
+          <Link className="nav-link" to="/profile">
             Your Profile
           </Link>
           {/* <Nav.Link>Add A Love</Nav.Link> */}
-          <Link className="nav-link" href="/family">
+          <Link className="nav-link" to="/family">
             Family
           </Link>
-          <Link className="nav-link" href="/friends">
+          <Link className="nav-link" to="/friends">
             Friends
           </Link>
           <Navbar.Toggle />
