@@ -27,7 +27,7 @@ app.get("/api/loves", async (req, res) => {
     console.log(req.query.user_sub);
     console.log(user, "this is from my server");
     const loves = await db.query(
-      "SELECT * FROM loves INNER JOIN avatars ON avatars.avatar_id=loves.avatar_id WHERE user_id=$1",
+      "SELECT * FROM loves INNER JOIN avatars ON avatars.avatar_id=loves.avatar_id WHERE user_id=$1 AND love_met IS NOT NULL",
       [user[0].user_id]
     );
     res.send(loves);
@@ -101,84 +101,6 @@ app.post("/api/loves", async (req, res) => {
 
 /////////////////
 
-//********** */
-// `insert into games(post_id, game_name, title, console, rating, recommendation, username, post, image_url) values(nextval('id_seq'), $1, $2, $3, $4, $5, $6, $7, $8) RETURNING *`,
-
-// create the POST request for love details in loves table
-// app.post("/api/loves", async (req, res) => {
-//   console.log(req.body);
-//   try {
-//     const newLove = {
-//       love_name: req.body.love_name,
-//       is_family: req.body.is_family,
-//       love_met: req.body.love_met,
-//       love_birthday: req.body.love_birthday,
-//       love_flower: req.body.love_flower,
-//       love_color: req.body.love_color,
-//       love_cake: req.body.love_cake,
-//     };
-//     //console.log([newLove.love_name, newLove.is_family, newLove.love_met]);
-//     const result = await db.query(
-//       "INSERT INTO loves(love_name, is_family, love_met, love_birthday, love_flower, love_color, love_cake) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
-//       [
-//         newLove.love_name,
-//         newLove.is_family,
-//         newLove.love_met,
-//         newLove.love_birthday,
-//         newLove.love_flower,
-//         newLove.love_color,
-//         newLove.love_cake,
-//       ]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-//   } catch (e) {
-//     console.log(e);
-//     return res.status(400).json({ e });
-//   }
-// });
-
-//**************** */
-
-// // create the get request for avatars in the endpoint '/api/avatars'
-// app.get("/api/avatars", async (req, res) => {
-//   try {
-//     const { rows: avatars } = await db.query("SELECT * FROM avatars");
-//     res.send(avatars);
-//   } catch (e) {
-//     return res.status(400).json({ e });
-//   }
-// });
-
-// //**************** */
-
-//********************************************************************** */
-
-// create the POST request for avatar details in avatar table
-// app.post("/api/avatars", async (req, res) => {
-//   console.log(req.body);
-//   try {
-//     const newAvatar = {
-//       hair: req.body.hair,
-//       eyes: req.body.eyes,
-//       mouth: req.body.mouth,
-//       skin: req.body.skin,
-//     };
-//     //console.log([newAvatar.hair,newAvatar.eyes, newAvatar.mouth, newAvatar.skin]);
-//     const result = await db.query(
-//       "INSERT INTO avatars(hair, eyes, mouth, skin) VALUES($1, $2, $3, $4) RETURNING *",
-//       [newAvatar.hair, newAvatar.eyes, newAvatar.mouth, newAvatar.skin]
-//     );
-//     console.log(result.rows[0]);
-//     res.json(result.rows[0]);
-//   } catch (e) {
-//     console.log(e);
-//     return res.status(400).json({ e });
-//   }
-// });
-
-//********************************************************************** */
-
 //------------------------------------------------------------- */
 
 // create the get request for friends and avatars*** in the endpoint '/api/family'
@@ -212,9 +134,9 @@ app.get("/api/family", async (req, res) => {
 // create the get request for User Profile *** in the endpoint '/api/profile'
 app.get("/api/profile", async (req, res) => {
   try {
-    const profile = await db.query(
-      "SELECT * FROM users INNER JOIN avatars ON avatars.avatar_id = users.avatar_id WHERE user_email= $1",
-      []
+    const [profile] = await db.query(
+      "SELECT * FROM users LEFT JOIN loves ON users.love_id = loves.love_id LEFT JOIN avatars ON avatars.avatar_id= loves.avatar_id WHERE sub= $1",
+      [req.query.user_sub]
     );
     res.send(profile);
   } catch (e) {
@@ -224,6 +146,90 @@ app.get("/api/profile", async (req, res) => {
 });
 
 //------------------------------------------
+
+// create the post request for User Profile *** in the endpoint '/api/profile'
+app.post("/api/profile", async (req, res) => {
+  try {
+    const [existingProfile] = await db.query(
+      "SELECT users.*, loves.avatar_id FROM users LEFT JOIN loves ON users.love_id = loves.love_id WHERE sub= $1 ",
+      [req.body.sub]
+    );
+
+    const profileValues = {
+      love_name: req.body.love_name,
+      love_birthday: req.body.love_birthday,
+      love_flower: req.body.love_flower,
+      love_color: req.body.love_color,
+      love_cake: req.body.love_cake,
+      hair: req.body.hair,
+      eyes: req.body.eyes,
+      mouth: req.body.mouth,
+      skin: req.body.skin,
+      hair_color: req.body.hairColor,
+    };
+
+    console.log(existingProfile, "existing profile");
+    if (existingProfile.love_id !== null) {
+      const updateProfile = await db.query(
+        "UPDATE loves SET love_name=$1, love_birthday=$2, love_flower=$3, love_color=$4, love_cake=$5 WHERE user_id=$6 AND love_id=$7",
+        [
+          profileValues.love_name,
+          profileValues.love_birthday,
+          profileValues.love_flower,
+          profileValues.love_color,
+          profileValues.love_cake,
+          existingProfile.user_id,
+          existingProfile.love_id,
+        ]
+      );
+      const updateAvatar = await db.query(
+        "UPDATE avatars SET hair=$1, eyes=$2, mouth=$3, skin=$4, hair_color=$5 WHERE avatar_id=$6",
+        [
+          profileValues.hair,
+          profileValues.eyes,
+          profileValues.mouth,
+          profileValues.skin,
+          profileValues.hair_color,
+          existingProfile.avatar_id,
+        ]
+      );
+    } else {
+      const [avatar] = await db.query(
+        "INSERT INTO avatars(hair, eyes, mouth, skin, hair_color) VALUES($1, $2, $3, $4, $5) RETURNING *",
+        [
+          profileValues.hair,
+          profileValues.eyes,
+          profileValues.mouth,
+          profileValues.skin,
+          profileValues.hair_color,
+        ]
+      );
+
+      const [profile] = await db.query(
+        "INSERT INTO loves(love_name, love_birthday, love_flower, love_color, love_cake, user_id, avatar_id) VALUES($1, $2, $3, $4, $5, $6, $7) RETURNING *",
+        [
+          profileValues.love_name,
+          profileValues.love_birthday,
+          profileValues.love_flower,
+          profileValues.love_color,
+          profileValues.love_cake,
+          existingProfile.user_id,
+          avatar.avatar_id,
+        ]
+      );
+
+      const other = await db.query(
+        "UPDATE users SET love_id=$1 WHERE user_id=$2",
+        [profile.love_id, existingProfile.user_id]
+      );
+    }
+    res.json({ sucess: true });
+  } catch (e) {
+    console.log(e.message);
+    return res.status(400).json({ e });
+  }
+});
+
 //*****************/////////////////////////////// */
 app.post("/api/account", async (req, res) => {
   try {
@@ -282,7 +288,7 @@ app.put("/api/loves/:love_id", async (req, res) => {
     updatedLove
   );
   // UPDATE loves SET lastname = "something" WHERE id="16";
-  const query = `UPDATE loves SET love_name=$1, is_family=$2, love_met=$3, love_birthday=$4, love_flower=$5, love_color=$6, love_cake=$7 WHERE id=${love_id} RETURNING *`;
+  const query = `UPDATE loves SET love_name=$1, is_family=$2, love_met=$3, love_birthday=$4, love_flower=$5, love_color=$6, love_cake=$7 WHERE love_id=${love_id} RETURNING *`;
   const values = [
     updatedLove.love_name,
     updatedLove.is_family,

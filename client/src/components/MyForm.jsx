@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
-import AvatarPreview from "../components/AvatarPreview";
+import AvatarPreview from "./AvatarPreview";
 import { useAuth0 } from "@auth0/auth0-react";
 
 const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
@@ -96,7 +96,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
     return fetch(apiURL, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...newLove, user_sub: user.sub }),
+      body: JSON.stringify({ ...newLove, sub: user.sub }),
     })
       .then((response) => {
         return response.json();
@@ -115,7 +115,7 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
     return fetch(`/api/loves/${toEditLove.love_id}`, {
       method: "PUT",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ ...toEditLove, user_sub: user.sub }),
+      body: JSON.stringify({ ...toEditLove, sub: user.sub }),
     })
       .then((response) => {
         return response.json();
@@ -152,25 +152,29 @@ const MyForm = ({ onSaveLove, editingLove, onUpdateLove, editingProfile }) => {
         />
       </Form.Group>
 
-      <Form.Check
-        type={"checkbox"}
-        id={`add-is_family`}
-        checked={love.is_family}
-        onChange={handleCheckChange}
-        label={`Are they family?`}
-      />
-
-      <Form.Group>
-        <Form.Label>Year Met</Form.Label>
-        <input
-          type="text"
-          id="add-love-met"
-          placeholder="Met"
-          required
-          value={love.love_met}
-          onChange={handleMetChange}
+      {editingProfile === false ? (
+        <Form.Check
+          type={"checkbox"}
+          id={`add-is_family`}
+          checked={love.is_family}
+          onChange={handleCheckChange}
+          label={`Are they family?`}
         />
-      </Form.Group>
+      ) : null}
+
+      {editingProfile === false ? (
+        <Form.Group>
+          <Form.Label>Year Met</Form.Label>
+          <input
+            type="text"
+            id="add-love-met"
+            placeholder="Met"
+            required
+            value={love.love_met}
+            onChange={handleMetChange}
+          />
+        </Form.Group>
+      ) : null}
 
       <Form.Group>
         <Form.Label>Birthday</Form.Label>
